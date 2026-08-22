@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "BPI Rajshahi",
     "Bangladesh",
   ],
+  verification: {
+    google: "C2cse6Qi1qHCwmzJIyLQojvptkYWCTBEzAdTn9mwoMs",
+  },
   openGraph: {
     title: "Md. Sakib Hossen | Software Developer",
     description: "Competitive Programmer | Software Developer | AI/ML Learner",
