@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Md. Sakib Hossen | Software Developer",
     description: "Competitive Programmer | Software Developer | AI/ML Learner",
-    url: "https://mdsakibhossen.vercel.app",
+    url: "https://mdsakib-hossen.vercel.app",
     siteName: "Md. Sakib Hossen Portfolio",
   },
 };
