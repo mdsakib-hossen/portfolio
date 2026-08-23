@@ -65,7 +65,8 @@ export default function CPStatsSection() {
   useEffect(() => { fetchData(); }, []);
 
   return (
-    <section id="cp-stats" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="cp-stats" className="section-padding w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
 
         {/* Title */}
@@ -257,6 +258,8 @@ export default function CPStatsSection() {
           </p>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }
+

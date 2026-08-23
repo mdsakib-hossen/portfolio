@@ -50,7 +50,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="contact" className="section-padding w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +177,9 @@ export default function ContactSection() {
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }
+
 

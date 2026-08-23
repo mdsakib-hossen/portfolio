@@ -58,7 +58,8 @@ export default function SkillsSection() {
   const { language } = useTheme();
 
   return (
-    <section id="skills" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="skills" className="section-padding w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +99,7 @@ export default function SkillsSection() {
               </div>
 
               {/* Skill badges */}
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <div className="flex flex-wrap gap-2">
                 {skills.map((skill, j) => (
                   <motion.span
                     key={skill}
@@ -106,7 +107,7 @@ export default function SkillsSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 + j * 0.04 }}
-                    className="px-2 py-1 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all break-words"
+                    className="px-3 py-1.5 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all"
                     style={{ background: "rgba(255,255,255,0.04)" }}
                   >
                     {skill}
@@ -168,6 +169,7 @@ export default function SkillsSection() {
         </motion.div>
 
       </motion.div>
+      </div>
     </section>
   );
 }

@@ -51,7 +51,8 @@ export default function BlogSection() {
   const { language } = useTheme();
 
   return (
-    <section id="blog" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="blog" className="section-padding w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +141,9 @@ export default function BlogSection() {
           </p>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }
+
 

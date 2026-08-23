@@ -30,7 +30,8 @@ export default function AboutSection() {
   const email = profileData?.email || "mdsakibhassan632@gmail.com";
 
   return (
-    <section id="about" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="about" className="section-padding w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
         <div className="text-center mb-8 md:mb-16">
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
@@ -101,7 +102,9 @@ export default function AboutSection() {
           ))}
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }
+
 
