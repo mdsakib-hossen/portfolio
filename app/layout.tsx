@@ -73,49 +73,66 @@ export const metadata: Metadata = {
 };
 
 // JSON-LD Structured Data
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Md. Sakib Hossen",
-  alternateName: ["Sakib Hossen", "mdsakib-hossen"],
-  description:
-    "Computer Science & Technology student at Bangladesh Polytechnic Institute, Rajshahi. Competitive Programmer, Software Developer, and AI/ML Learner.",
-  url: BASE_URL,
-  email: "mdsakibhassan632@gmail.com",
-  jobTitle: "Software Developer & Competitive Programmer",
-  affiliation: {
-    "@type": "EducationalOrganization",
-    name: "Bangladesh Polytechnic Institute, Rajshahi",
-    url: "https://bpi.gov.bd",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Md. Sakib Hossen",
+      "alternateName": ["Sakib Hossen", "mdsakib-hossen"],
+      "jobTitle": "Competitive Programmer & Software Developer",
+      "description": "A passionate Competitive Programmer focused on Data Structures and Algorithms, alongside building real-life Software Development projects like BPI EduManage and Karigori Result.",
+      "url": BASE_URL,
+      "email": "mdsakibhassan632@gmail.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Shohoj Coding (Campus Ambassador)"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Bangladesh Polytechnic Institute, Rajshahi",
+        "url": "https://bpi.gov.bd"
+      },
+      "affiliation": {
+        "@type": "EducationalOrganization",
+        "name": "Bangladesh Polytechnic Institute, Rajshahi",
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rajshahi",
+        "addressCountry": "BD",
+      },
+      "sameAs": [
+        "https://github.com/mdsakib-hossen",
+        "https://www.linkedin.com/in/mdsakib-hossen",
+        "https://codeforces.com/profile/mdsakibhossen",
+        "https://leetcode.com/u/mdsakib-dev/",
+        "https://www.codechef.com/users/mdsakib_dev",
+        "https://atcoder.jp/users/mdsakibhossen",
+      ],
+      "knowsAbout": [
+        "Competitive Programming",
+        "Software Development",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Data Structures and Algorithms",
+        "React Native", "Flask", "Python", "C++",
+      ],
+    }
   },
-  alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "Bangladesh Polytechnic Institute, Rajshahi",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Rajshahi",
-    addressCountry: "BD",
-  },
-  sameAs: [
-    "https://github.com/mdsakib-hossen",
-    "https://www.linkedin.com/in/mdsakib-hossen",
-    "https://codeforces.com/profile/mdsakibhossen",
-    "https://leetcode.com/u/mdsakib-dev/",
-    "https://www.codechef.com/users/mdsakib_dev",
-  ],
-  knowsAbout: [
-    "Competitive Programming",
-    "Software Development",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Data Structures and Algorithms",
-    "React Native",
-    "Flask",
-    "Python",
-    "C++",
-  ],
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Md. Sakib Hossen Portfolio",
+    "url": BASE_URL,
+    "description": "Portfolio of Md. Sakib Hossen — Competitive Programmer, Software Developer, and AI/ML Learner from Bangladesh.",
+    "author": {
+      "@type": "Person",
+      "name": "Md. Sakib Hossen"
+    }
+  }
+];
 
 export default function RootLayout({
   children,
