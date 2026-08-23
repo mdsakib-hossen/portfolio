@@ -198,11 +198,12 @@ export default function AnalyticsDashboard() {
               className="flex items-center gap-2 px-4 py-2 rounded-xl glass border border-blue-500/30 text-blue-400 text-sm font-semibold hover:border-blue-400 transition-all">
               <Share2 size={15} /> Share
             </motion.button>
-            <motion.button id="pdf-btn" onClick={handlePrint} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+            <motion.a href="/sakib-cp-2035/dashboard/analytics/print" target="_blank"
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold"
               style={{ background: "linear-gradient(135deg, #7c3aed, #db2777)" }}>
               <Download size={15} /> Download PDF
-            </motion.button>
+            </motion.a>
             <button onClick={fetchAnalytics} className="p-2 rounded-xl glass border border-purple-500/30 text-purple-400">
               <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
             </button>
