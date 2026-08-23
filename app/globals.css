@@ -27,6 +27,7 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Custom scrollbar */
@@ -73,6 +74,8 @@ body {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(167, 139, 250, 0.15);
+  overflow: hidden;
+  max-width: 100%;
 }
 
 /* Animated gradient border */
@@ -92,7 +95,13 @@ body {
 
 /* Section styles */
 .section-padding {
-  padding: 40px 0;
+  padding: 32px 0;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 56px 0;
+  }
 }
 
 @media (min-width: 768px) {

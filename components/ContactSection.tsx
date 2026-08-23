@@ -50,7 +50,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding max-w-7xl mx-auto px-6">
+    <section id="contact" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -61,24 +61,24 @@ export default function ContactSection() {
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// GET IN TOUCH" : "// যোগাযোগ করো"}
           </p>
-          <h2 className="text-4xl font-bold gradient-text">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
             {language === "en" ? "Contact Me" : "যোগাযোগ"}
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Left */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
               {language === "en" ? "Let's work together!" : "একসাথে কাজ করি!"}
             </h3>
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
               {language === "en"
                 ? "Have a project idea, want to collaborate, or just want to say hi — my inbox is always open!"
                 : "প্রজেক্ট আইডিয়া থাকলে, collaborate করতে চাইলে, বা শুধু হ্যালো বলতে চাইলে — সবসময় available!"}
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {[
                 { icon: MailIcon, label: profile.email, href: `mailto:${profile.email}`, color: "text-red-400" },
                 { icon: GithubIcon, label: profile.github.replace("https://", ""), href: profile.github, color: "text-white" },
@@ -87,22 +87,22 @@ export default function ContactSection() {
               ].map(({ icon: Icon, label, href, color }) => (
                 <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer"
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-4 glass p-4 rounded-xl group"
+                  className="flex items-center gap-3 sm:gap-4 glass p-3 sm:p-4 rounded-xl group min-w-0"
                 >
-                  <Icon size={20} className={`${color} group-hover:scale-110 transition-transform flex-shrink-0`} />
-                  <span className="text-gray-300 text-sm truncate">{label}</span>
+                  <Icon size={18} className={`${color} group-hover:scale-110 transition-transform flex-shrink-0`} />
+                  <span className="text-gray-300 text-sm truncate min-w-0 flex-1">{label}</span>
                 </motion.a>
               ))}
             </div>
           </div>
 
           {/* Right - Form */}
-          <div>
+          <div className="w-full">
             {status === "success" ? (
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="glass p-8 rounded-2xl text-center h-full flex flex-col items-center justify-center min-h-[400px]"
+                className="glass p-6 sm:p-8 rounded-2xl text-center h-full flex flex-col items-center justify-center min-h-[300px] sm:min-h-[400px]"
               >
                 <CheckCircle size={52} className="text-green-400 mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2">
@@ -117,10 +117,10 @@ export default function ContactSection() {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="glass p-8 rounded-2xl space-y-5">
+              <form onSubmit={handleSubmit} className="glass p-5 sm:p-8 rounded-2xl space-y-4 sm:space-y-5 w-full">
                 {status === "error" && (
                   <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 p-3 rounded-xl">
-                    <AlertCircle size={16} />
+                    <AlertCircle size={16} className="flex-shrink-0" />
                     {language === "en" ? "Something went wrong. Try again." : "কিছু একটা ভুল হয়েছে। আবার চেষ্টা করো।"}
                   </div>
                 )}
@@ -131,7 +131,7 @@ export default function ContactSection() {
                   </label>
                   <input type="text" required value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors"
+                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors text-sm sm:text-base"
                     placeholder={language === "en" ? "John Doe" : "তোমার নাম"}
                   />
                 </div>
@@ -142,7 +142,7 @@ export default function ContactSection() {
                   </label>
                   <input type="email" required value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors"
+                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors text-sm sm:text-base"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -151,16 +151,16 @@ export default function ContactSection() {
                   <label className="text-purple-400 text-sm font-mono mb-2 block">
                     {language === "en" ? "Message" : "বার্তা"} *
                   </label>
-                  <textarea required rows={5} value={form.message}
+                  <textarea required rows={4} value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors resize-none"
+                    className="w-full bg-white/5 border border-purple-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors resize-none text-sm sm:text-base"
                     placeholder={language === "en" ? "Your message here..." : "তোমার বার্তা লিখো..."}
                   />
                 </div>
 
                 <motion.button type="submit" disabled={status === "loading"}
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 transition-opacity"
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 transition-opacity text-sm sm:text-base"
                 >
                   {status === "loading" ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

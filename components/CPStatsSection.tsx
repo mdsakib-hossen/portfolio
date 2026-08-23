@@ -65,7 +65,7 @@ export default function CPStatsSection() {
   useEffect(() => { fetchData(); }, []);
 
   return (
-    <section id="cp-stats" className="section-padding max-w-7xl mx-auto px-6">
+    <section id="cp-stats" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
 
         {/* Title */}
@@ -73,7 +73,7 @@ export default function CPStatsSection() {
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// WHERE I COMPETE" : "// যেখানে প্রতিযোগিতা করি"}
           </p>
-          <h2 className="text-4xl font-bold gradient-text">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
             {language === "en" ? "Competitive Programming" : "কম্পিটিটিভ প্রোগ্রামিং"}
           </h2>
           {lastUpdated && (
@@ -89,21 +89,21 @@ export default function CPStatsSection() {
           )}
         </div>
 
-        {/* Live Stats Cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
+        {/* Live Stats Cards — stacked on mobile, side by side on tablet+ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 
           {/* Codeforces Card */}
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="glass rounded-2xl p-6 border border-blue-500/20">
+            className="glass rounded-2xl p-4 sm:p-6 border border-blue-500/20">
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white">CF</div>
-                <div>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white flex-shrink-0">CF</div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-white">Codeforces</h3>
-                  <p className="text-gray-500 text-xs font-mono">@mdsakibhossen</p>
+                  <p className="text-gray-500 text-xs font-mono truncate">@mdsakibhossen</p>
                 </div>
               </div>
-              <a href="https://codeforces.com/profile/mdsakibhossen" target="_blank" rel="noopener noreferrer">
+              <a href="https://codeforces.com/profile/mdsakibhossen" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
                 <ExternalLink size={16} className="text-gray-500 hover:text-blue-400 transition-colors" />
               </a>
             </div>
@@ -114,17 +114,17 @@ export default function CPStatsSection() {
               </div>
             ) : cf ? (
               <>
-                <div className="grid grid-cols-3 gap-3 mb-5">
-                  <div className="glass rounded-xl p-3 text-center">
-                    <div className="text-2xl font-bold" style={{ color: rankColor[cf.rank] || "#a78bfa" }}>{cf.rating}</div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
+                  <div className="glass rounded-xl p-2 sm:p-3 text-center">
+                    <div className="text-xl sm:text-2xl font-bold" style={{ color: rankColor[cf.rank] || "#a78bfa" }}>{cf.rating}</div>
                     <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Rating" : "রেটিং"}</div>
                   </div>
-                  <div className="glass rounded-xl p-3 text-center">
-                    <div className="text-2xl font-bold text-yellow-400">{cf.maxRating}</div>
+                  <div className="glass rounded-xl p-2 sm:p-3 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-400">{cf.maxRating}</div>
                     <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Max" : "সর্বোচ্চ"}</div>
                   </div>
-                  <div className="glass rounded-xl p-3 text-center">
-                    <div className="text-2xl font-bold text-green-400">{cf.solved}</div>
+                  <div className="glass rounded-xl p-2 sm:p-3 text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-green-400">{cf.solved}</div>
                     <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Solved" : "সমাধান"}</div>
                   </div>
                 </div>
@@ -141,8 +141,8 @@ export default function CPStatsSection() {
                     <p className="text-gray-500 text-xs font-mono mb-3">{language === "en" ? "Recent Contests" : "সাম্প্রতিক contest"}</p>
                     <div className="space-y-2">
                       {cf.recentContests.slice(0, 3).map((c, i) => (
-                        <div key={i} className="flex items-center justify-between text-xs">
-                          <span className="text-gray-400 truncate max-w-[60%]">{c.contestName}</span>
+                        <div key={i} className="flex items-center justify-between text-xs gap-2">
+                          <span className="text-gray-400 truncate min-w-0 flex-1">{c.contestName}</span>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <span className="text-gray-500">#{c.rank}</span>
                             <span className={`flex items-center gap-0.5 font-bold ${c.ratingChange > 0 ? "text-green-400" : c.ratingChange < 0 ? "text-red-400" : "text-gray-400"}`}>
@@ -163,16 +163,16 @@ export default function CPStatsSection() {
 
           {/* LeetCode Card */}
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="glass rounded-2xl p-6 border border-yellow-500/20">
+            className="glass rounded-2xl p-4 sm:p-6 border border-yellow-500/20">
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-600 to-yellow-400 flex items-center justify-center font-bold text-white">LC</div>
-                <div>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-600 to-yellow-400 flex items-center justify-center font-bold text-white flex-shrink-0">LC</div>
+                <div className="min-w-0">
                   <h3 className="font-bold text-white">LeetCode</h3>
-                  <p className="text-gray-500 text-xs font-mono">@mdsakib-dev</p>
+                  <p className="text-gray-500 text-xs font-mono truncate">@mdsakib-dev</p>
                 </div>
               </div>
-              <a href="https://leetcode.com/u/mdsakib-dev/" target="_blank" rel="noopener noreferrer">
+              <a href="https://leetcode.com/u/mdsakib-dev/" target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
                 <ExternalLink size={16} className="text-gray-500 hover:text-yellow-400 transition-colors" />
               </a>
             </div>
@@ -228,29 +228,29 @@ export default function CPStatsSection() {
           </motion.div>
         </div>
 
-        {/* Other platform cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        {/* Other platform cards — 2 col mobile, 4 col desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
           {cpProfiles.filter(p => p.platform !== "Codeforces" && p.platform !== "LeetCode").map(({ platform, handle, url, color, bgColor, borderColor, icon }, i) => (
             <motion.a key={platform} href={url} target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
               whileHover={{ scale: 1.03, y: -4 }}
-              className={`glass p-4 rounded-xl border ${borderColor} ${bgColor} group`}>
-              <div className="flex items-center justify-between mb-3">
-                <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center font-bold text-white text-sm`}>{icon}</div>
-                <ExternalLink size={13} className="text-gray-500 group-hover:text-purple-400 transition-colors" />
+              className={`glass p-3 sm:p-4 rounded-xl border ${borderColor} ${bgColor} group`}>
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center font-bold text-white text-xs sm:text-sm flex-shrink-0`}>{icon}</div>
+                <ExternalLink size={12} className="text-gray-500 group-hover:text-purple-400 transition-colors flex-shrink-0" />
               </div>
-              <h3 className="text-white font-bold text-sm mb-0.5">{platform}</h3>
-              <p className={`text-xs font-mono bg-gradient-to-r ${color} bg-clip-text text-transparent`}>@{handle}</p>
+              <h3 className="text-white font-bold text-xs sm:text-sm mb-0.5 truncate">{platform}</h3>
+              <p className={`text-xs font-mono bg-gradient-to-r ${color} bg-clip-text text-transparent truncate`}>@{handle}</p>
             </motion.a>
           ))}
         </div>
 
         {/* Goal */}
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
-          className="glass p-8 rounded-2xl text-center border border-purple-500/20">
-          <div className="text-5xl mb-4">🏆</div>
-          <h3 className="text-2xl font-bold gradient-text mb-2">{language === "en" ? "Ultimate Goal" : "চূড়ান্ত লক্ষ্য"}</h3>
-          <p className="text-gray-400">
+          className="glass p-6 sm:p-8 rounded-2xl text-center border border-purple-500/20">
+          <div className="text-4xl sm:text-5xl mb-4">🏆</div>
+          <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-2">{language === "en" ? "Ultimate Goal" : "চূড়ান্ত লক্ষ্য"}</h3>
+          <p className="text-gray-400 text-sm sm:text-base">
             {language === "en"
               ? "Achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals"
               : "Codeforces গ্র্যান্ডমাস্টার রেটিং অর্জন করা এবং ICPC World Finals-এ বাংলাদেশকে প্রতিনিধিত্ব করা"}

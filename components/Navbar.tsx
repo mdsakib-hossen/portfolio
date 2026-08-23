@@ -40,11 +40,11 @@ export default function Navbar() {
             : "py-5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-2">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-lg md:text-xl font-bold gradient-text cursor-pointer select-none"
+            className="text-base md:text-xl font-bold gradient-text cursor-pointer select-none flex-shrink-0"
             onClick={() => scrollTo("home")}
           >
             {"<Sakib />"}
@@ -64,7 +64,7 @@ export default function Navbar() {
           </div>
 
           {/* Right Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}

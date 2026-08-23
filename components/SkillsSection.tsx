@@ -58,7 +58,7 @@ export default function SkillsSection() {
   const { language } = useTheme();
 
   return (
-    <section id="skills" className="section-padding max-w-7xl mx-auto px-6">
+    <section id="skills" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -66,17 +66,17 @@ export default function SkillsSection() {
         transition={{ duration: 0.6 }}
       >
         {/* Title */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// WHAT I KNOW" : "// আমি যা জানি"}
           </p>
-          <h2 className="text-4xl font-bold gradient-text">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
             {language === "en" ? "Skills & Technologies" : "দক্ষতা ও প্রযুক্তি"}
           </h2>
         </div>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid — 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map(({ title, icon, color, border, glow, skills }, i) => (
             <motion.div
               key={i}
@@ -85,20 +85,20 @@ export default function SkillsSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
               whileHover={{ y: -4 }}
-              className={`glass rounded-2xl p-6 border ${border} hover:shadow-xl ${glow} transition-all duration-300`}
+              className={`glass rounded-2xl p-4 sm:p-6 border ${border} hover:shadow-xl ${glow} transition-all duration-300`}
             >
               {/* Header */}
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-lg shadow-lg`}>
+              <div className="flex items-center gap-3 mb-4 sm:mb-5">
+                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-base sm:text-lg shadow-lg flex-shrink-0`}>
                   {icon}
                 </div>
-                <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent`}>
+                <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent truncate`}>
                   {title[language]}
                 </h3>
               </div>
 
               {/* Skill badges */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {skills.map((skill, j) => (
                   <motion.span
                     key={skill}
@@ -106,7 +106,7 @@ export default function SkillsSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 + j * 0.04 }}
-                    className="px-3 py-1.5 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all"
+                    className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all whitespace-nowrap"
                     style={{ background: "rgba(255,255,255,0.04)" }}
                   >
                     {skill}
@@ -129,12 +129,12 @@ export default function SkillsSection() {
             <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
               {language === "en" ? "// RIGHT NOW" : "// এই মুহূর্তে"}
             </p>
-            <h3 className="text-2xl font-bold gradient-text">
+            <h3 className="text-xl sm:text-2xl font-bold gradient-text">
               {language === "en" ? "Current Focus" : "বর্তমান মনোযোগ"}
             </h3>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { icon: "⚔️", title: "Competitive Programming", desc: { en: "Aiming for Grandmaster", bn: "গ্র্যান্ডমাস্টার লক্ষ্যে" }, color: "from-purple-600 to-violet-400", border: "border-purple-500/30" },
               { icon: "🤖", title: "AI/ML Engineering", desc: { en: "Deep Learning & Neural Networks", bn: "ডিপ লার্নিং শিখছি" }, color: "from-pink-600 to-rose-400", border: "border-pink-500/30" },
@@ -147,9 +147,9 @@ export default function SkillsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 + i * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className={`glass rounded-2xl p-5 border ${border} transition-all duration-300`}
+                className={`glass rounded-2xl p-4 sm:p-5 border ${border} transition-all duration-300`}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-2xl mb-4 shadow-lg`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-xl sm:text-2xl mb-3 sm:mb-4 shadow-lg`}>
                   {icon}
                 </div>
                 <h4 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent mb-1`}>

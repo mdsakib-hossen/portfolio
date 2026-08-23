@@ -6,8 +6,8 @@ export default function Footer() {
   const { language } = useTheme();
 
   return (
-    <footer className="border-t border-purple-500/10 py-8 text-center">
-      <p className="text-gray-500 text-sm">
+    <footer className="border-t border-purple-500/10 py-6 sm:py-8 text-center px-4">
+      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
         {language === "en"
           ? "Designed & Built by "
           : "ডিজাইন ও নির্মাণ করেছেন "}

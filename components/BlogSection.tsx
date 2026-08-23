@@ -51,7 +51,7 @@ export default function BlogSection() {
   const { language } = useTheme();
 
   return (
-    <section id="blog" className="section-padding max-w-7xl mx-auto px-6">
+    <section id="blog" className="section-padding max-w-7xl mx-auto px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -62,12 +62,12 @@ export default function BlogSection() {
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// MY THOUGHTS" : "// আমার চিন্তাভাবনা"}
           </p>
-          <h2 className="text-4xl font-bold gradient-text">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
             {language === "en" ? "Blog & Articles" : "ব্লগ ও লেখা"}
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           {blogs.map(({ slug, title, excerpt, date, readTime, tags, color, topColor }, i) => (
             <motion.div
               key={slug}
@@ -81,12 +81,12 @@ export default function BlogSection() {
               {/* Top color bar */}
               <div className={`h-1.5 ${topColor}`} />
 
-              <div className="p-6 flex flex-col flex-1">
+              <div className="p-5 sm:p-6 flex flex-col flex-1">
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
                   {tags.map((tag) => (
                     <span key={tag}
-                      className={`text-xs px-2.5 py-1 rounded-full font-semibold bg-gradient-to-r ${color} bg-clip-text text-transparent border border-purple-500/20`}
+                      className={`text-xs px-2 sm:px-2.5 py-1 rounded-full font-semibold bg-gradient-to-r ${color} bg-clip-text text-transparent border border-purple-500/20 whitespace-nowrap`}
                     >
                       {tag}
                     </span>
@@ -94,28 +94,28 @@ export default function BlogSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className={`font-bold text-base md:text-lg text-white group-hover:bg-gradient-to-r group-hover:${color} group-hover:bg-clip-text group-hover:text-transparent transition-all leading-snug mb-3`}>
+                <h3 className={`font-bold text-sm sm:text-base md:text-lg text-white group-hover:bg-gradient-to-r group-hover:${color} group-hover:bg-clip-text group-hover:text-transparent transition-all leading-snug mb-3`}>
                   {title[language]}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6 flex-1">
                   {excerpt[language]}
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between mt-auto">
-                  <div className="flex items-center gap-3 text-gray-500 text-xs">
+                <div className="flex items-center justify-between mt-auto gap-2">
+                  <div className="flex items-center gap-2 sm:gap-3 text-gray-500 text-xs flex-wrap">
                     <div className="flex items-center gap-1">
                       <Clock size={11} />
                       <span>{readTime} min</span>
                     </div>
                     <span>·</span>
-                    <span>{date}</span>
+                    <span className="truncate">{date}</span>
                   </div>
                   <motion.div
                     whileHover={{ x: 4 }}
-                    className={`flex items-center gap-1 text-xs font-semibold bg-gradient-to-r ${color} bg-clip-text text-transparent`}
+                    className={`flex items-center gap-1 text-xs font-semibold bg-gradient-to-r ${color} bg-clip-text text-transparent flex-shrink-0`}
                   >
                     {language === "en" ? "Read" : "পড়ো"}
                     <ArrowRight size={12} className="text-purple-400" />
@@ -131,7 +131,7 @@ export default function BlogSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-10"
+          className="text-center mt-8 sm:mt-10"
         >
           <p className="text-gray-500 text-sm">
             {language === "en"

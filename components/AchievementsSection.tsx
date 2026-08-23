@@ -8,7 +8,7 @@ export default function AchievementsSection() {
   const { language } = useTheme();
 
   return (
-    <section id="achievements" className="section-padding max-w-5xl mx-auto px-4">
+    <section id="achievements" className="section-padding max-w-5xl mx-auto px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,48 @@ export default function AchievementsSection() {
           </h2>
         </div>
 
-        <div className="relative">
+        {/* Mobile layout: single column with left-side line */}
+        <div className="md:hidden relative">
+          {/* Left vertical line for mobile */}
+          <div
+            className="absolute left-4 top-0 bottom-0 w-px"
+            style={{ background: "linear-gradient(to bottom, #7c3aed, #ec4899, transparent)" }}
+          />
+
+          <div className="space-y-6 pl-10">
+            {achievements.map(({ icon, title, org, year, color }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="relative"
+              >
+                {/* Dot on the left line */}
+                <div
+                  className="absolute -left-[26px] top-4 w-4 h-4 rounded-full border-2 border-gray-900 z-10 flex-shrink-0"
+                  style={{ background: "linear-gradient(135deg, #7c3aed, #ec4899)", boxShadow: "0 0 10px rgba(124,58,237,0.5)" }}
+                />
+
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="glass rounded-xl p-4 border border-white/5 w-full"
+                >
+                  <span className="text-2xl block mb-2">{icon}</span>
+                  <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1`}>
+                    {title[language]}
+                  </h3>
+                  <p className="text-gray-400 text-xs">{org}</p>
+                  <p className="text-purple-400 text-xs font-mono mt-1">{year}</p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop layout: alternating timeline */}
+        <div className="hidden md:block relative">
           {/* Center vertical line */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
             style={{ background: "linear-gradient(to bottom, #7c3aed, #ec4899, transparent)" }}
@@ -72,4 +113,3 @@ export default function AchievementsSection() {
     </section>
   );
 }
-
