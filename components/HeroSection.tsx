@@ -36,8 +36,14 @@ export default function HeroSection() {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [ParticlesComponent, setParticlesComponent] = useState<React.ComponentType<any> | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Disable particles on mobile for better performance
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
+    if (mobile) return;
+
     const loadParticles = async () => {
       try {
         const particlesModule = await import("@tsparticles/react");
