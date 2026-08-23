@@ -165,7 +165,7 @@ export default function AnalyticsPrintPage() {
             <div style={{ fontSize: "11px", fontWeight: "700", color: "#7c3aed", textTransform: "uppercase", letterSpacing: "1px", marginBottom: "12px" }}>Device Breakdown</div>
             <ResponsiveContainer width="100%" height={100}>
               <PieChart>
-                <Pie data={data.deviceData} cx="50%" cy="50%" outerRadius={45} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}
+                <Pie data={data.deviceData} cx="50%" cy="50%" outerRadius={45} dataKey="value" label={({ name, percent }: { name: string; percent?: number }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`} labelLine={false}
                   style={{ fontSize: "9px" }}>
                   {data.deviceData.map((_: any, i: number) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
