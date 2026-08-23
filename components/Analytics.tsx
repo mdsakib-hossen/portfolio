@@ -8,12 +8,21 @@ export default function Analytics() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Don't track admin pages
     if (pathname.includes("sakib-cp-2035")) return;
 
     const track = async () => {
-      const device = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1024 ? "tablet" : "desktop";
-      const referrer = document.referrer ? new URL(document.referrer).hostname : "direct";
+      // Detect device using userAgent — more reliable than innerWidth
+      const ua = navigator.userAgent.toLowerCase();
+      let device = "desktop";
+      if (/mobile|android|iphone|ipod|blackberry|windows phone/i.test(ua)) {
+        device = "mobile";
+      } else if (/ipad|tablet|playbook|silk/i.test(ua)) {
+        device = "tablet";
+      }
+
+      const referrer = document.referrer
+        ? (() => { try { return new URL(document.referrer).hostname; } catch { return "direct"; } })()
+        : "direct";
 
       await supabase.from("page_views").insert({
         page: pathname,
@@ -23,7 +32,6 @@ export default function Analytics() {
       });
     };
 
-    // Small delay to avoid tracking bots
     const timer = setTimeout(track, 2000);
     return () => clearTimeout(timer);
   }, [pathname]);
