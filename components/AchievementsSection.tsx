@@ -53,10 +53,10 @@ export default function AchievementsSection() {
                   className="glass rounded-xl p-4 border border-white/5 w-full"
                 >
                   <span className="text-2xl block mb-2">{icon}</span>
-                  <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1`}>
+                  <h3 className={`font-bold text-sm sm:text-base bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1 break-words`}>
                     {title[language]}
                   </h3>
-                  <p className="text-gray-400 text-xs">{org}</p>
+                  <p className="text-gray-400 text-xs break-words">{org}</p>
                   <p className="text-purple-400 text-xs font-mono mt-1">{year}</p>
                 </motion.div>
               </motion.div>
@@ -82,16 +82,16 @@ export default function AchievementsSection() {
                 className={`relative flex items-center ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
               >
                 {/* Card — half width */}
-                <div className={`w-[calc(50%-20px)] ${i % 2 === 0 ? "pr-4 text-right" : "pl-4 text-left"}`}>
+                <div className={`w-[calc(50%-20px)] ${i % 2 === 0 ? "pr-4 text-right" : "pl-4 text-left"} min-w-0`}>
                   <motion.div
                     whileHover={{ scale: 1.03 }}
                     className="glass rounded-xl p-4 md:p-6 border border-white/5 inline-block w-full"
                   >
                     <span className="text-2xl md:text-4xl block mb-2">{icon}</span>
-                    <h3 className={`font-bold text-sm md:text-lg bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1`}>
+                    <h3 className={`font-bold text-sm md:text-lg bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1 break-words`}>
                       {title[language]}
                     </h3>
-                    <p className="text-gray-400 text-xs md:text-sm">{org}</p>
+                    <p className="text-gray-400 text-xs md:text-sm break-words">{org}</p>
                     <p className="text-purple-400 text-xs font-mono mt-1">{year}</p>
                   </motion.div>
                 </div>

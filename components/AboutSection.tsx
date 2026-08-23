@@ -80,7 +80,7 @@ export default function AboutSection() {
                 { label: language === "en" ? "Location" : "অবস্থান", value: location },
                 { label: language === "en" ? "Email" : "ইমেইল", value: email },
               ].map(({ label, value }) => (
-                <div key={label} className="glass p-3 rounded-xl min-w-0">
+                <div key={label} className="glass p-3 sm:p-4 rounded-xl min-w-0 overflow-hidden">
                   <p className="text-purple-400 text-xs font-mono mb-1">{label}</p>
                   <p className="text-white text-sm font-medium truncate">{value}</p>
                 </div>

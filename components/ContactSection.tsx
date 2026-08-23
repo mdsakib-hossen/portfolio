@@ -87,10 +87,10 @@ export default function ContactSection() {
               ].map(({ icon: Icon, label, href, color }) => (
                 <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer"
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 sm:gap-4 glass p-3 sm:p-4 rounded-xl group min-w-0"
+                  className="flex items-center gap-3 sm:gap-4 glass p-3 sm:p-4 rounded-xl group min-w-0 overflow-hidden"
                 >
                   <Icon size={18} className={`${color} group-hover:scale-110 transition-transform flex-shrink-0`} />
-                  <span className="text-gray-300 text-sm truncate min-w-0 flex-1">{label}</span>
+                  <span className="text-gray-300 text-xs sm:text-sm truncate min-w-0 flex-1">{label}</span>
                 </motion.a>
               ))}
             </div>

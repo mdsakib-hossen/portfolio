@@ -92,7 +92,7 @@ export default function SkillsSection() {
                 <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-base sm:text-lg shadow-lg flex-shrink-0`}>
                   {icon}
                 </div>
-                <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent truncate`}>
+                <h3 className={`font-bold text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent truncate min-w-0`}>
                   {title[language]}
                 </h3>
               </div>
@@ -106,7 +106,7 @@ export default function SkillsSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 + j * 0.04 }}
-                    className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all whitespace-nowrap"
+                    className="px-2 py-1 rounded-full text-xs font-semibold text-gray-300 border border-white/10 hover:border-purple-400/50 hover:text-purple-300 transition-all break-words"
                     style={{ background: "rgba(255,255,255,0.04)" }}
                   >
                     {skill}

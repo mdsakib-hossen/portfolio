@@ -141,8 +141,8 @@ export default function CPStatsSection() {
                     <p className="text-gray-500 text-xs font-mono mb-3">{language === "en" ? "Recent Contests" : "সাম্প্রতিক contest"}</p>
                     <div className="space-y-2">
                       {cf.recentContests.slice(0, 3).map((c, i) => (
-                        <div key={i} className="flex items-center justify-between text-xs gap-2">
-                          <span className="text-gray-400 truncate min-w-0 flex-1">{c.contestName}</span>
+                        <div key={i} className="flex items-center justify-between text-xs gap-2 min-w-0">
+                          <span className="text-gray-400 truncate min-w-0 flex-1 max-w-[55%]">{c.contestName}</span>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <span className="text-gray-500">#{c.rank}</span>
                             <span className={`flex items-center gap-0.5 font-bold ${c.ratingChange > 0 ? "text-green-400" : c.ratingChange < 0 ? "text-red-400" : "text-gray-400"}`}>

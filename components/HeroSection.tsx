@@ -133,7 +133,7 @@ export default function HeroSection() {
           </div>
 
           {/* Description */}
-          <p className="text-gray-300 text-xs sm:text-sm md:text-base max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2">
+          <p className="text-gray-300 text-xs sm:text-sm md:text-base max-w-sm sm:max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2 break-words">
             {language === "en"
               ? "CST Student at BPI Rajshahi • Solving problems, building products, and aiming for CP Grandmaster 🏆"
               : "BPI রাজশাহীর CST ছাত্র • সমস্যা সমাধান করি, পণ্য বানাই, CP গ্র্যান্ডমাস্টার লক্ষ্যে আছি 🏆"}

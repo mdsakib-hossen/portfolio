@@ -99,7 +99,7 @@ export default function BlogSection() {
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6 flex-1">
+                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6 flex-1 line-clamp-3">
                   {excerpt[language]}
                 </p>
 

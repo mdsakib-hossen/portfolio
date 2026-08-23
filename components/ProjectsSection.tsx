@@ -30,8 +30,8 @@ export default function ProjectsSection() {
                   <div className="min-w-0 flex-1">
                     {award && (
                       <div className="flex items-center gap-2 mb-2">
-                        <Trophy size={16} className="text-yellow-400 flex-shrink-0" />
-                        <span className="text-yellow-400 text-sm font-semibold truncate">{award}</span>
+                        <Trophy size={14} className="text-yellow-400 flex-shrink-0" />
+                        <span className="text-yellow-400 text-xs sm:text-sm font-semibold truncate min-w-0">{award}</span>
                       </div>
                     )}
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{title}</h3>
@@ -53,7 +53,7 @@ export default function ProjectsSection() {
                     <span key={tag} className="px-2 sm:px-3 py-1 rounded-full text-xs glass border border-purple-500/20 text-purple-300 whitespace-nowrap">{tag}</span>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {liveUrl && (
                     <motion.a href={liveUrl} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }}
                       className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-600 to-cyan-600 text-white text-sm font-semibold">
