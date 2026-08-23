@@ -85,18 +85,10 @@ const jsonLd = [
       "description": "A passionate Competitive Programmer focused on Data Structures and Algorithms, alongside building real-life Software Development projects like BPI EduManage and Karigori Result.",
       "url": BASE_URL,
       "email": "mdsakibhassan632@gmail.com",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Shohoj Coding (Campus Ambassador)"
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Bangladesh Polytechnic Institute, Rajshahi",
-        "url": "https://bpi.gov.bd"
-      },
       "affiliation": {
         "@type": "EducationalOrganization",
         "name": "Bangladesh Polytechnic Institute, Rajshahi",
+        "url": "https://bpi.gov.bd"
       },
       "address": {
         "@type": "PostalAddress",
