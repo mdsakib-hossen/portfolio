@@ -61,7 +61,9 @@ export default function AboutSection() {
               </div>
               <div className="absolute -bottom-4 -right-4 glass px-3 py-1.5 rounded-full flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs text-green-400">{language === "en" ? "Open to Work" : "কাজের জন্য প্রস্তুত"}</span>
+                <span className="text-xs text-green-400">
+                  {language === "en" ? "Open to Collaboration" : "কোলাবোরেশনে আগ্রহী"}
+                </span>
               </div>
             </div>
           </motion.div>

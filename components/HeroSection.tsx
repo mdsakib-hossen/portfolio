@@ -101,7 +101,7 @@ export default function HeroSection() {
       <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-pink-600/10 rounded-full blur-3xl" />
 
       {/* Content — perfectly centered */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-5 py-20">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-5 py-12 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,10 +186,10 @@ export default function HeroSection() {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 cursor-pointer z-10"
+        className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 cursor-pointer z-10"
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
       >
-        <ChevronDown size={24} className="text-purple-400" />
+        <ChevronDown size={22} className="text-purple-400" />
       </motion.div>
     </section>
   );
