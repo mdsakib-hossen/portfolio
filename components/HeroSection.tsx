@@ -13,6 +13,22 @@ const MailIcon = ({ size = 20, className = "" }: { size?: number; className?: st
   </svg>
 );
 
+const typingTexts = {
+  en: [
+    "Competitive Programmer",
+    "Software Developer",
+    "AI/ML Learner",
+    "CST Student @ BPI Rajshahi",
+    "Shohoj Coding Ambassador",
+  ],
+  bn: [
+    "কম্পিটিটিভ প্রোগ্রামার",
+    "সফটওয়্যার ডেভেলপার",
+    "AI/ML শিক্ষার্থী",
+    "BPI রাজশাহী CST ছাত্র",
+  ],
+};
+
 export default function HeroSection() {
   const { language } = useTheme();
   const [displayText, setDisplayText] = useState("");
@@ -37,7 +53,7 @@ export default function HeroSection() {
     loadParticles();
   }, []);
 
-  const texts = profile.typingTexts[language];
+  const texts = typingTexts[language];
 
   useEffect(() => {
     const current = texts[textIndex];
@@ -62,7 +78,7 @@ export default function HeroSection() {
       color: { value: ["#a78bfa", "#f472b6", "#60a5fa"] },
       links: { color: "#a78bfa", distance: 150, enable: true, opacity: 0.15, width: 1 },
       move: { enable: true, speed: 0.8, direction: "none" as const, random: true, outModes: { default: "bounce" as const } },
-      number: { density: { enable: true }, value: 80 },
+      number: { density: { enable: true }, value: 60 },
       opacity: { value: 0.4 },
       size: { value: { min: 1, max: 3 } },
     },
@@ -70,73 +86,110 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative w-full overflow-hidden"
+      style={{ minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
+      {/* Particles */}
       {ParticlesComponent && (
         <ParticlesComponent id="tsparticles" options={particlesOptions} className="absolute inset-0 z-0" />
       )}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
 
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <p className="text-purple-400 font-mono text-sm md:text-lg mb-4 tracking-widest">
+      {/* Gradient orbs */}
+      <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-600/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-pink-600/10 rounded-full blur-3xl" />
+
+      {/* Content — perfectly centered */}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-5 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-3xl mx-auto flex flex-col items-center"
+        >
+          {/* Greeting */}
+          <p className="text-purple-400 font-mono text-sm md:text-base mb-3 tracking-widest">
             {language === "en" ? "👋 Hello World! I'm" : "👋 হ্যালো ওয়ার্ল্ড! আমি"}
           </p>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 glow-text">
-            <span className="gradient-text">{profile.name}</span>
+
+          {/* Name */}
+          <h1 className="font-bold mb-3 leading-tight" style={{
+            fontSize: "clamp(2rem, 8vw, 4.5rem)",
+            background: "linear-gradient(135deg, #a78bfa, #f472b6, #60a5fa)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>
+            {profile.name}
           </h1>
-          <div className="h-10 md:h-12 flex items-center justify-center mb-8">
-            <span className="text-lg md:text-2xl text-gray-300 font-mono">
-              {displayText}<span className="animate-pulse text-purple-400">|</span>
+
+          {/* Typing */}
+          <div className="h-8 md:h-10 flex items-center justify-center mb-5">
+            <span className="text-base md:text-xl text-gray-200 font-mono">
+              {displayText}
+              <span className="animate-pulse text-purple-400">|</span>
             </span>
           </div>
-          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed px-2">
+
+          {/* Description */}
+          <p className="text-gray-300 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
             {language === "en"
-              ? `CST Student at BPI Rajshahi • Solving problems, building products, and aiming for CP Grandmaster 🏆`
-              : `BPI রাজশাহীর CST ছাত্র • সমস্যা সমাধান করি, পণ্য বানাই, CP গ্র্যান্ডমাস্টার হওয়ার লক্ষ্যে আছি 🏆`}
+              ? "CST Student at BPI Rajshahi • Solving problems, building products, and aiming for CP Grandmaster 🏆"
+              : "BPI রাজশাহীর CST ছাত্র • সমস্যা সমাধান করি, পণ্য বানাই, CP গ্র্যান্ডমাস্টার লক্ষ্যে আছি 🏆"}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-10 md:mb-12">
+
+          {/* Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
             <motion.button
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-6 md:px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:opacity-90 transition-opacity text-sm md:text-base"
-              style={{ boxShadow: "0 0 20px rgba(167,139,250,0.3)" }}
+              className="px-6 py-2.5 rounded-full text-white font-semibold text-sm"
+              style={{ background: "linear-gradient(135deg, #7c3aed, #db2777)", boxShadow: "0 0 20px rgba(167,139,250,0.4)" }}
             >
               {language === "en" ? "View Projects" : "প্রজেক্ট দেখো"}
             </motion.button>
             <motion.a
               href="/resume" target="_blank"
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              className="px-6 md:px-8 py-3 rounded-full glass border border-purple-400/30 text-purple-400 font-semibold hover:border-purple-400 transition-all flex items-center gap-2 text-sm md:text-base"
+              className="px-6 py-2.5 rounded-full border border-purple-400/50 text-purple-300 font-semibold text-sm flex items-center gap-2 hover:border-purple-400 transition-all"
+              style={{ background: "rgba(167,139,250,0.08)" }}
             >
-              <Download size={16} />
+              <Download size={15} />
               {language === "en" ? "Download CV" : "CV ডাউনলোড"}
             </motion.a>
           </div>
-          <div className="flex items-center justify-center gap-4 md:gap-5">
+
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-4">
             {[
               { icon: GithubIcon, href: profile.github, label: "GitHub" },
               { icon: LinkedinIcon, href: profile.linkedin, label: "LinkedIn" },
               { icon: FacebookIcon, href: profile.facebook, label: "Facebook" },
               { icon: MailIcon, href: `mailto:${profile.email}`, label: "Email" },
             ].map(({ icon: Icon, href, label }) => (
-              <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer"
+              <motion.a
+                key={label} href={href} target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, y: -3 }}
-                className="glass p-2.5 md:p-3 rounded-xl hover:border-purple-400/50 transition-all group" title={label}
+                className="p-2.5 rounded-xl border border-purple-500/20 hover:border-purple-400/60 transition-all"
+                style={{ background: "rgba(167,139,250,0.08)" }}
+                title={label}
               >
-                <Icon size={18} className="text-gray-400 group-hover:text-purple-400 transition-colors" />
+                <Icon size={18} className="text-gray-300 hover:text-purple-400 transition-colors" />
               </motion.a>
             ))}
           </div>
         </motion.div>
       </div>
 
+      {/* Scroll indicator */}
       <motion.div
-        animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 cursor-pointer z-10"
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
       >
-        <ChevronDown size={28} className="text-purple-400" />
+        <ChevronDown size={24} className="text-purple-400" />
       </motion.div>
     </section>
   );
