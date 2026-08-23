@@ -89,7 +89,62 @@ export default function AnalyticsDashboard() {
 
   useEffect(() => { fetchAnalytics(); }, [period]);
 
-  const handlePrint = () => window.print();
+  const handlePrint = async () => {
+    try {
+      const { default: html2canvas } = await import("html2canvas");
+      const { default: jsPDF } = await import("jspdf");
+
+      const element = printRef.current;
+      if (!element) return;
+
+      // Show loading
+      const btn = document.getElementById("pdf-btn");
+      if (btn) btn.textContent = "⏳ Generating...";
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0a0a0f",
+        logging: false,
+        windowWidth: 1200,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      let heightLeft = pdfHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+      heightLeft -= pageHeight;
+
+      // Multi-page support
+      while (heightLeft >= 0) {
+        position = heightLeft - pdfHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+        heightLeft -= pageHeight;
+      }
+
+      const date = new Date().toISOString().split("T")[0];
+      pdf.save(`portfolio-analytics-${date}.pdf`);
+
+      if (btn) btn.textContent = "✅ Downloaded!";
+      setTimeout(() => { if (btn) btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download PDF'; }, 3000);
+    } catch (err) {
+      console.error(err);
+      // Fallback to print
+      window.print();
+    }
+  };
 
   const handleShare = async () => {
     const text = `📊 Portfolio Analytics — ${new Date().toLocaleDateString()}\n\n🌐 Total Visits: ${totalViews}\n📅 Today: ${todayViews}\n📆 This Month: ${monthViews}\n\n🔗 mdsakib-hossen.vercel.app`;
@@ -143,7 +198,7 @@ export default function AnalyticsDashboard() {
               className="flex items-center gap-2 px-4 py-2 rounded-xl glass border border-blue-500/30 text-blue-400 text-sm font-semibold hover:border-blue-400 transition-all">
               <Share2 size={15} /> Share
             </motion.button>
-            <motion.button onClick={handlePrint} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+            <motion.button id="pdf-btn" onClick={handlePrint} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold"
               style={{ background: "linear-gradient(135deg, #7c3aed, #db2777)" }}>
               <Download size={15} /> Download PDF
