@@ -58,7 +58,7 @@ export default function BlogSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// MY THOUGHTS" : "// আমার চিন্তাভাবনা"}
           </p>
@@ -143,3 +143,4 @@ export default function BlogSection() {
     </section>
   );
 }
+

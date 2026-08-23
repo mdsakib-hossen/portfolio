@@ -123,9 +123,9 @@ export default function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-16"
+          className="mt-8 md:mt-16"
         >
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 md:mb-8">
             <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
               {language === "en" ? "// RIGHT NOW" : "// এই মুহূর্তে"}
             </p>

@@ -15,7 +15,7 @@ export default function AchievementsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// MY JOURNEY" : "// আমার যাত্রা"}
           </p>
@@ -72,3 +72,4 @@ export default function AchievementsSection() {
     </section>
   );
 }
+

@@ -12,7 +12,7 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className="section-padding max-w-7xl mx-auto px-6">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
             {language === "en" ? "// WHAT I'VE BUILT" : "// আমি যা বানিয়েছি"}
           </p>
@@ -86,3 +86,4 @@ export default function ProjectsSection() {
     </section>
   );
 }
+
