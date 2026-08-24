@@ -11,7 +11,6 @@ export default function Analytics() {
     if (pathname.includes("sakib-cp-2035")) return;
 
     const track = async () => {
-      // Detect device using userAgent — more reliable than innerWidth
       const ua = navigator.userAgent.toLowerCase();
       let device = "desktop";
       if (/mobile|android|iphone|ipod|blackberry|windows phone/i.test(ua)) {
@@ -24,12 +23,19 @@ export default function Analytics() {
         ? (() => { try { return new URL(document.referrer).hostname; } catch { return "direct"; } })()
         : "direct";
 
-      await supabase.from("page_views").insert({
+      // Insert new view
+      const { error } = await supabase.from("page_views").insert({
         page: pathname,
         referrer,
         device,
         created_at: new Date().toISOString(),
       });
+
+      // Auto cleanup: ~2% chance per visit, delete data older than 60 days
+      if (!error && Math.random() < 0.02) {
+        const cutoff = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+        await supabase.from("page_views").delete().lt("created_at", cutoff);
+      }
     };
 
     const timer = setTimeout(track, 2000);

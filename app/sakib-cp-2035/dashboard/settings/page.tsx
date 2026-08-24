@@ -99,10 +99,13 @@ export default function SettingsPage() {
   };
 
   const clearAnalytics = async () => {
-    if (!confirm("This will delete ALL analytics data permanently. Are you sure?")) return;
-    const res = await fetch("/api/admin/clear-analytics", { method: "DELETE" });
-    if (res.ok) alert("Analytics data cleared!");
-    else alert("Failed to clear analytics data.");
+    if (!confirm("This will delete analytics data older than 7 days. Continue?")) return;
+    const res = await fetch("/api/admin/clear-analytics", {
+      method: "DELETE",
+      headers: { "x-admin-auth": "true" },
+    });
+    if (res.ok) alert("✅ Old analytics data cleared!");
+    else alert("❌ Failed. Try from Supabase SQL Editor.");
   };
 
   const exportData = async () => {
