@@ -76,7 +76,7 @@ export default function AboutSection() {
             <p className="text-gray-400 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{about}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
-                { label: language === "en" ? "Institute" : "প্রতিষ্ঠান", value: "BPI Rajshahi" },
+                { label: language === "en" ? "Institute" : "প্রতিষ্ঠান", value: "Bangladesh Polytechnic Institute" },
                 { label: language === "en" ? "Department" : "বিভাগ", value: "CST" },
                 { label: language === "en" ? "Location" : "অবস্থান", value: location },
                 { label: language === "en" ? "Email" : "ইমেইল", value: email },
@@ -106,5 +106,6 @@ export default function AboutSection() {
     </section>
   );
 }
+
 
 

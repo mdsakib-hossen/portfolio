@@ -25,7 +25,7 @@ export const profile = {
       "Competitive Programmer",
       "Software Developer",
       "AI/ML Learner",
-      "CST Student @ BPI Rajshahi",
+      "CST Student @ Bangladesh Polytechnic Institute",
       "Shohoj Coding Ambassador",
     ],
     bn: [
@@ -201,3 +201,4 @@ export const stats = [
   { value: 6, suffix: "", label: { en: "CP Platforms", bn: "CP প্ল্যাটফর্ম" } },
   { value: 1, suffix: "", label: { en: "Award Won", bn: "পুরস্কার" } },
 ];
+
