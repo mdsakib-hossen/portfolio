@@ -25,6 +25,13 @@ body {
   font-weight: 600;
   margin-bottom: 16px;
   display: block;
+  text-align: center;
+}
+
+/* Force center alignment in about section */
+#about p,
+#about h3 {
+  text-align: center;
 }
 
 .card {
