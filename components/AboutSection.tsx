@@ -78,17 +78,16 @@ export default function AboutSection() {
         </div>
 
         {/* About text */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h3 className="text-xl font-bold text-slate-900 mb-4 text-center">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <h3 className="text-lg font-bold text-slate-900 mb-4 text-center">
             Passionate Developer &amp; Competitive Programmer
           </h3>
-          <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base text-center mx-auto">
+          <p className="text-slate-600 leading-relaxed mb-4 text-sm md:text-base text-center">
             {profile.about.en}
           </p>
-          <p className="text-slate-500 leading-loose text-sm md:text-base text-center mx-auto">
-            I believe in learning by building. Every project I take on is an opportunity to apply
-            theoretical knowledge to real problems. From campus management systems to national-level
-            result platforms, I love creating software that makes a difference.
+          <p className="text-slate-500 leading-relaxed text-sm text-center">
+            I believe in learning by building — from campus management systems to
+            national-level result platforms, I love creating software that makes a difference.
           </p>
         </div>
 
