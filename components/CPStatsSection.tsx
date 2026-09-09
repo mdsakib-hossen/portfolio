@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "./ThemeProvider";
 import { ExternalLink, TrendingUp, TrendingDown, Minus, RefreshCw } from "lucide-react";
 import { cpProfiles } from "@/lib/data";
 import { useEffect, useState } from "react";
@@ -40,7 +39,6 @@ const rankColor: Record<string, string> = {
 };
 
 export default function CPStatsSection() {
-  const { language } = useTheme();
   const [cf, setCf] = useState<CFData | null>(null);
   const [lc, setLc] = useState<LCData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -71,26 +69,20 @@ export default function CPStatsSection() {
 
         {/* Title */}
         <div className="text-center mb-8 md:mb-16">
-          <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
-            {language === "en" ? "// WHERE I COMPETE" : "// যেখানে প্রতিযোগিতা করি"}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
-            {language === "en" ? "Competitive Programming" : "কম্পিটিটিভ প্রোগ্রামিং"}
-          </h2>
+          <p className="text-cyan-400 font-mono text-sm tracking-widest mb-2">// WHERE I COMPETE</p>
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">Competitive Programming</h2>
           {lastUpdated && (
             <div className="flex items-center justify-center gap-2 mt-3">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-gray-500 text-xs">
-                {language === "en" ? `Live data · Updated ${lastUpdated}` : `লাইভ ডেটা · আপডেট ${lastUpdated}`}
-              </span>
-              <button onClick={fetchData} className="text-purple-400 hover:text-purple-300 transition-colors">
+              <span className="text-gray-500 text-xs">Live data · Updated {lastUpdated}</span>
+              <button onClick={fetchData} className="text-cyan-400 hover:text-cyan-300 transition-colors">
                 <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
               </button>
             </div>
           )}
         </div>
 
-        {/* Live Stats Cards — stacked on mobile, side by side on tablet+ */}
+        {/* Live Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 
           {/* Codeforces Card */}
@@ -117,29 +109,28 @@ export default function CPStatsSection() {
               <>
                 <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
                   <div className="glass rounded-xl p-2 sm:p-3 text-center">
-                    <div className="text-xl sm:text-2xl font-bold" style={{ color: rankColor[cf.rank] || "#a78bfa" }}>{cf.rating}</div>
-                    <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Rating" : "রেটিং"}</div>
+                    <div className="text-xl sm:text-2xl font-bold" style={{ color: rankColor[cf.rank] || "#06b6d4" }}>{cf.rating}</div>
+                    <div className="text-gray-500 text-xs mt-1">Rating</div>
                   </div>
                   <div className="glass rounded-xl p-2 sm:p-3 text-center">
                     <div className="text-xl sm:text-2xl font-bold text-yellow-400">{cf.maxRating}</div>
-                    <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Max" : "সর্বোচ্চ"}</div>
+                    <div className="text-gray-500 text-xs mt-1">Max</div>
                   </div>
                   <div className="glass rounded-xl p-2 sm:p-3 text-center">
                     <div className="text-xl sm:text-2xl font-bold text-green-400">{cf.solved}</div>
-                    <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Solved" : "সমাধান"}</div>
+                    <div className="text-gray-500 text-xs mt-1">Solved</div>
                   </div>
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: `${rankColor[cf.rank]}20`, color: rankColor[cf.rank] || "#a78bfa" }}>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full" style={{ background: `${rankColor[cf.rank]}20`, color: rankColor[cf.rank] || "#06b6d4" }}>
                     {cf.rank.charAt(0).toUpperCase() + cf.rank.slice(1)}
                   </span>
                 </div>
 
-                {/* Recent contests */}
                 {cf.recentContests.length > 0 && (
                   <div>
-                    <p className="text-gray-500 text-xs font-mono mb-3">{language === "en" ? "Recent Contests" : "সাম্প্রতিক contest"}</p>
+                    <p className="text-gray-500 text-xs font-mono mb-3">Recent Contests</p>
                     <div className="space-y-2">
                       {cf.recentContests.slice(0, 3).map((c, i) => (
                         <div key={i} className="flex items-center justify-between text-xs gap-2 min-w-0">
@@ -158,7 +149,7 @@ export default function CPStatsSection() {
                 )}
               </>
             ) : (
-              <p className="text-gray-500 text-sm text-center py-4">{language === "en" ? "Could not load data" : "ডেটা লোড হয়নি"}</p>
+              <p className="text-gray-500 text-sm text-center py-4">Could not load data</p>
             )}
           </motion.div>
 
@@ -187,11 +178,10 @@ export default function CPStatsSection() {
                 <div className="grid grid-cols-2 gap-3 mb-5">
                   <div className="glass rounded-xl p-3 text-center col-span-2">
                     <div className="text-3xl font-bold text-yellow-400">{lc.total}</div>
-                    <div className="text-gray-500 text-xs mt-1">{language === "en" ? "Total Solved" : "মোট সমাধান"}</div>
+                    <div className="text-gray-500 text-xs mt-1">Total Solved</div>
                   </div>
                 </div>
 
-                {/* Difficulty breakdown */}
                 <div className="space-y-3 mb-5">
                   {[
                     { label: "Easy", count: lc.easy, color: "bg-green-400", textColor: "text-green-400", max: lc.total || 1 },
@@ -218,18 +208,18 @@ export default function CPStatsSection() {
 
                 {lc.ranking > 0 && (
                   <div className="glass rounded-xl p-3 text-center">
-                    <div className="text-lg font-bold text-purple-400">#{lc.ranking.toLocaleString()}</div>
-                    <div className="text-gray-500 text-xs">{language === "en" ? "Global Ranking" : "গ্লোবাল র‍্যাংক"}</div>
+                    <div className="text-lg font-bold text-cyan-400">#{lc.ranking.toLocaleString()}</div>
+                    <div className="text-gray-500 text-xs">Global Ranking</div>
                   </div>
                 )}
               </>
             ) : (
-              <p className="text-gray-500 text-sm text-center py-4">{language === "en" ? "Could not load data" : "ডেটা লোড হয়নি"}</p>
+              <p className="text-gray-500 text-sm text-center py-4">Could not load data</p>
             )}
           </motion.div>
         </div>
 
-        {/* Other platform cards — 2 col mobile, 4 col desktop */}
+        {/* Other platform cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
           {cpProfiles.filter(p => p.platform !== "Codeforces" && p.platform !== "LeetCode").map(({ platform, handle, url, color, bgColor, borderColor, icon }, i) => (
             <motion.a key={platform} href={url} target="_blank" rel="noopener noreferrer"
@@ -238,7 +228,7 @@ export default function CPStatsSection() {
               className={`glass p-3 sm:p-4 rounded-xl border ${borderColor} ${bgColor} group`}>
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center font-bold text-white text-xs sm:text-sm flex-shrink-0`}>{icon}</div>
-                <ExternalLink size={12} className="text-gray-500 group-hover:text-purple-400 transition-colors flex-shrink-0" />
+                <ExternalLink size={12} className="text-gray-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" />
               </div>
               <h3 className="text-white font-bold text-xs sm:text-sm mb-0.5 truncate">{platform}</h3>
               <p className={`text-xs font-mono bg-gradient-to-r ${color} bg-clip-text text-transparent truncate`}>@{handle}</p>
@@ -248,13 +238,11 @@ export default function CPStatsSection() {
 
         {/* Goal */}
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
-          className="glass p-6 sm:p-8 rounded-2xl text-center border border-purple-500/20">
+          className="glass p-6 sm:p-8 rounded-2xl text-center border border-cyan-500/20">
           <div className="text-4xl sm:text-5xl mb-4">🏆</div>
-          <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-2">{language === "en" ? "Ultimate Goal" : "চূড়ান্ত লক্ষ্য"}</h3>
+          <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-2">Ultimate Goal</h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            {language === "en"
-              ? "Achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals"
-              : "Codeforces গ্র্যান্ডমাস্টার রেটিং অর্জন করা এবং ICPC World Finals-এ বাংলাদেশকে প্রতিনিধিত্ব করা"}
+            Achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals
           </p>
         </motion.div>
       </motion.div>
@@ -262,4 +250,3 @@ export default function CPStatsSection() {
     </section>
   );
 }
-

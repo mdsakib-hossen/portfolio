@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download, ChevronDown } from "lucide-react";
 import { GithubIcon, LinkedinIcon, FacebookIcon } from "./icons";
-import { useTheme } from "./ThemeProvider";
 import { profile } from "@/lib/data";
 
 const MailIcon = ({ size = 20, className = "" }: { size?: number; className?: string }) => (
@@ -13,35 +12,23 @@ const MailIcon = ({ size = 20, className = "" }: { size?: number; className?: st
   </svg>
 );
 
-const typingTexts = {
-  en: [
-    "Competitive Programmer",
-    "Software Developer",
-    "AI/ML Learner",
-    "CST Student @ Bangladesh Polytechnic Institute, Rajshahi",
-    "Shohoj Coding Ambassador",
-  ],
-  bn: [
-    "কম্পিটিটিভ প্রোগ্রামার",
-    "সফটওয়্যার ডেভেলপার",
-    "AI/ML শিক্ষার্থী",
-    "BPI রাজশাহী CST ছাত্র",
-  ],
-};
+const typingTexts = [
+  "Competitive Programmer",
+  "Software Developer",
+  "AI/ML Learner",
+  "CST Student @ Bangladesh Polytechnic Institute, Rajshahi",
+  "Shohoj Coding Ambassador",
+];
 
 export default function HeroSection() {
-  const { language } = useTheme();
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [ParticlesComponent, setParticlesComponent] = useState<React.ComponentType<any> | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Disable particles on mobile for better performance
     const mobile = window.innerWidth < 768;
-    setIsMobile(mobile);
     if (mobile) return;
 
     const loadParticles = async () => {
@@ -59,10 +46,8 @@ export default function HeroSection() {
     loadParticles();
   }, []);
 
-  const texts = typingTexts[language];
-
   useEffect(() => {
-    const current = texts[textIndex];
+    const current = typingTexts[textIndex];
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         setDisplayText(current.substring(0, charIndex + 1));
@@ -71,21 +56,21 @@ export default function HeroSection() {
       } else {
         setDisplayText(current.substring(0, charIndex - 1));
         setCharIndex(p => p - 1);
-        if (charIndex === 0) { setIsDeleting(false); setTextIndex(p => (p + 1) % texts.length); }
+        if (charIndex === 0) { setIsDeleting(false); setTextIndex(p => (p + 1) % typingTexts.length); }
       }
     }, isDeleting ? 50 : 100);
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, textIndex, texts]);
+  }, [charIndex, isDeleting, textIndex]);
 
   const particlesOptions = {
     background: { color: { value: "transparent" } },
     fpsLimit: 60,
     particles: {
-      color: { value: ["#a78bfa", "#f472b6", "#60a5fa"] },
-      links: { color: "#a78bfa", distance: 150, enable: true, opacity: 0.15, width: 1 },
+      color: { value: ["#06b6d4", "#0ea5e9", "#38bdf8"] },
+      links: { color: "#06b6d4", distance: 150, enable: true, opacity: 0.12, width: 1 },
       move: { enable: true, speed: 0.8, direction: "none" as const, random: true, outModes: { default: "bounce" as const } },
       number: { density: { enable: true }, value: 60 },
-      opacity: { value: 0.4 },
+      opacity: { value: 0.35 },
       size: { value: { min: 1, max: 3 } },
     },
     detectRetina: true,
@@ -103,10 +88,10 @@ export default function HeroSection() {
       )}
 
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-purple-600/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-pink-600/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-cyan-600/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-64 md:w-96 h-64 md:h-96 bg-sky-600/10 rounded-full blur-3xl" />
 
-      {/* Content — perfectly centered */}
+      {/* Content */}
       <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -115,14 +100,14 @@ export default function HeroSection() {
           className="w-full max-w-3xl mx-auto flex flex-col items-center"
         >
           {/* Greeting */}
-          <p className="text-purple-400 font-mono text-xs sm:text-sm md:text-base mb-3 tracking-widest">
-            {language === "en" ? "👋 Hello World! I'm" : "👋 হ্যালো ওয়ার্ল্ড! আমি"}
+          <p className="text-cyan-400 font-mono text-xs sm:text-sm md:text-base mb-3 tracking-widest">
+            👋 Hello World! I&apos;m
           </p>
 
           {/* Name */}
           <h1 className="font-bold mb-3 leading-tight w-full" style={{
             fontSize: "clamp(1.8rem, 6vw, 4.5rem)",
-            background: "linear-gradient(135deg, #a78bfa, #f472b6, #60a5fa)",
+            background: "linear-gradient(135deg, #06b6d4, #0ea5e9, #38bdf8)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -134,35 +119,33 @@ export default function HeroSection() {
           <div className="h-7 sm:h-8 md:h-10 flex items-center justify-center mb-4 sm:mb-5 w-full overflow-hidden">
             <span className="text-sm sm:text-base md:text-xl text-gray-200 font-mono truncate max-w-full px-2">
               {displayText}
-              <span className="animate-pulse text-purple-400">|</span>
+              <span className="animate-pulse text-cyan-400">|</span>
             </span>
           </div>
 
           {/* Description */}
           <p className="text-gray-300 text-xs sm:text-sm md:text-base max-w-sm sm:max-w-xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2 break-words">
-            {language === "en"
-              ? "CST Student at Bangladesh Polytechnic Institute, Rajshahi • Solving problems, building products, and aiming for CP Grandmaster 🏆"
-              : "BPI রাজশাহীর CST ছাত্র • সমস্যা সমাধান করি, পণ্য বানাই, CP গ্র্যান্ডমাস্টার লক্ষ্যে আছি 🏆"}
+            CST Student at Bangladesh Polytechnic Institute, Rajshahi • Solving problems, building products, and aiming for CP Grandmaster 🏆
           </p>
 
-          {/* Buttons — stack vertically on very small screens */}
+          {/* Buttons */}
           <div className="flex flex-col min-[400px]:flex-row flex-wrap items-center justify-center gap-3 mb-6 sm:mb-8 w-full px-4">
             <motion.button
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
               className="w-full min-[400px]:w-auto px-6 py-2.5 rounded-full text-white font-semibold text-sm"
-              style={{ background: "linear-gradient(135deg, #7c3aed, #db2777)", boxShadow: "0 0 20px rgba(167,139,250,0.4)" }}
+              style={{ background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", boxShadow: "0 0 20px rgba(6,182,212,0.4)" }}
             >
-              {language === "en" ? "View Projects" : "প্রজেক্ট দেখো"}
+              View Projects
             </motion.button>
             <motion.a
               href="/resume" target="_blank"
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              className="w-full min-[400px]:w-auto px-6 py-2.5 rounded-full border border-purple-400/50 text-purple-300 font-semibold text-sm flex items-center justify-center gap-2 hover:border-purple-400 transition-all"
-              style={{ background: "rgba(167,139,250,0.08)" }}
+              className="w-full min-[400px]:w-auto px-6 py-2.5 rounded-full border border-cyan-400/50 text-cyan-300 font-semibold text-sm flex items-center justify-center gap-2 hover:border-cyan-400 transition-all"
+              style={{ background: "rgba(6,182,212,0.08)" }}
             >
               <Download size={15} />
-              {language === "en" ? "Download CV" : "CV ডাউনলোড"}
+              Download CV
             </motion.a>
           </div>
 
@@ -177,11 +160,11 @@ export default function HeroSection() {
               <motion.a
                 key={label} href={href} target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, y: -3 }}
-                className="p-2 sm:p-2.5 rounded-xl border border-purple-500/20 hover:border-purple-400/60 transition-all"
-                style={{ background: "rgba(167,139,250,0.08)" }}
+                className="p-2 sm:p-2.5 rounded-xl border border-cyan-500/20 hover:border-cyan-400/60 transition-all"
+                style={{ background: "rgba(6,182,212,0.08)" }}
                 title={label}
               >
-                <Icon size={16} className="sm:w-[18px] sm:h-[18px] text-gray-300 hover:text-purple-400 transition-colors" />
+                <Icon size={16} className="sm:w-[18px] sm:h-[18px] text-gray-300 hover:text-cyan-400 transition-colors" />
               </motion.a>
             ))}
           </div>
@@ -195,9 +178,8 @@ export default function HeroSection() {
         className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 cursor-pointer z-10"
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
       >
-        <ChevronDown size={22} className="text-purple-400" />
+        <ChevronDown size={22} className="text-cyan-400" />
       </motion.div>
     </section>
   );
 }
-

@@ -1,25 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "./ThemeProvider";
 import { ExternalLink, Trophy } from "lucide-react";
 import { GithubIcon } from "./icons";
 import { projects, profile } from "@/lib/data";
 
 export default function ProjectsSection() {
-  const { language } = useTheme();
-
   return (
     <section id="projects" className="section-padding w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
         <div className="text-center mb-8 md:mb-16">
-          <p className="text-purple-400 font-mono text-sm tracking-widest mb-2">
-            {language === "en" ? "// WHAT I'VE BUILT" : "// আমি যা বানিয়েছি"}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">
-            {language === "en" ? "Featured Projects" : "প্রধান প্রজেক্টসমূহ"}
-          </h2>
+          <p className="text-cyan-400 font-mono text-sm tracking-widest mb-2">// WHAT I&apos;VE BUILT</p>
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text">Featured Projects</h2>
         </div>
 
         <div className="space-y-6 sm:space-y-8">
@@ -37,7 +30,7 @@ export default function ProjectsSection() {
                     )}
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{title}</h3>
                     <p className={`text-sm bg-gradient-to-r ${color} bg-clip-text text-transparent font-medium`}>
-                      {subtitle[language]}
+                      {subtitle["en"]}
                     </p>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold glass border flex-shrink-0 ${
@@ -45,13 +38,13 @@ export default function ProjectsSection() {
                     statusType === "dev" ? "border-orange-500/30 text-orange-400" :
                     "border-gray-500/30 text-gray-400"
                   }`}>
-                    {status[language]}
+                    {status["en"]}
                   </span>
                 </div>
-                <p className="text-gray-400 leading-relaxed mb-5 text-sm sm:text-base">{description[language]}</p>
+                <p className="text-gray-400 leading-relaxed mb-5 text-sm sm:text-base">{description["en"]}</p>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-5 sm:mb-6">
                   {tags.map((tag) => (
-                    <span key={tag} className="px-2 sm:px-3 py-1 rounded-full text-xs glass border border-purple-500/20 text-purple-300 whitespace-nowrap">{tag}</span>
+                    <span key={tag} className="px-2 sm:px-3 py-1 rounded-full text-xs glass border border-cyan-500/20 text-cyan-300 whitespace-nowrap">{tag}</span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -59,14 +52,14 @@ export default function ProjectsSection() {
                     <motion.a href={liveUrl} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }}
                       className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-600 to-cyan-600 text-white text-sm font-semibold">
                       <ExternalLink size={14} />
-                      {language === "en" ? "Live Demo" : "লাইভ দেখো"}
+                      Live Demo
                     </motion.a>
                   )}
                   {githubUrl && (
                     <motion.a href={githubUrl} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-purple-500/30 text-purple-400 text-sm font-semibold">
+                      className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyan-500/30 text-cyan-400 text-sm font-semibold">
                       <GithubIcon size={14} />
-                      {language === "en" ? "Source Code" : "সোর্স কোড"}
+                      Source Code
                     </motion.a>
                   )}
                 </div>
@@ -78,9 +71,9 @@ export default function ProjectsSection() {
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10 sm:mt-12">
           <a href={profile.github} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors text-sm sm:text-base">
+            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm sm:text-base">
             <GithubIcon size={18} />
-            {language === "en" ? "View all projects on GitHub" : "GitHub এ সব প্রজেক্ট দেখো"}
+            View all projects on GitHub
           </a>
         </motion.div>
       </motion.div>
@@ -88,5 +81,3 @@ export default function ProjectsSection() {
     </section>
   );
 }
-
-
