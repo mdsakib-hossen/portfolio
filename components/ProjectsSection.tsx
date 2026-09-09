@@ -18,13 +18,13 @@ export default function ProjectsSection() {
         <div className="text-center mb-16">
           <p className="section-label">My Work</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Featured Projects</h2>
-          <p style={{ textAlign: "center" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
             Real-world software built to solve real problems
-          </p>
+          </div>
         </div>
 
         {/* Project cards — full width stack */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8" style={{ maxWidth: "900px", margin: "0 auto" }}>
           {projects.map((project) => {
             const status = statusConfig[project.statusType] ?? statusConfig.private;
 
@@ -72,7 +72,7 @@ export default function ProjectsSection() {
                     </div>
 
                     {/* Subtitle */}
-                    <p className="text-slate-500 text-sm mb-3">{project.subtitle.en}</p>
+                    <p className="text-slate-500 text-sm mb-3" style={{ textAlign: "center" }}>{project.subtitle.en}</p>
 
                     {/* Description */}
                     <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-5">

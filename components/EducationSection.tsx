@@ -16,9 +16,9 @@ export default function EducationSection() {
         <div className="text-center mb-16">
           <p className="section-label">Background</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Education</h2>
-          <p style={{ textAlign: "center" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
             My academic journey and ongoing learning
-          </p>
+          </div>
         </div>
 
         {/* Timeline */}
@@ -53,8 +53,8 @@ export default function EducationSection() {
                   </div>
 
                   <p className="text-slate-700 font-semibold text-sm mb-2">{item.degree}</p>
-                  <p className="text-slate-500 text-sm mb-3">{item.field}</p>
-                  <p className="text-slate-400 text-xs">📍 {item.location}</p>
+                  <p className="text-slate-500 text-sm mb-3" style={{ textAlign: "center" }}>{item.field}</p>
+                  <p className="text-slate-400 text-xs" style={{ textAlign: "center" }}>📍 {item.location}</p>
                 </div>
               </div>
             ))}

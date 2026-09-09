@@ -87,9 +87,9 @@ export default function ContactSection() {
         <div className="text-center mb-16">
           <p className="section-label">Get In Touch</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Contact Me</h2>
-          <p style={{ textAlign: "center" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
             Have a project idea, want to collaborate, or just want to say hi? My inbox is always open.
-          </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

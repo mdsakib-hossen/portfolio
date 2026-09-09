@@ -10,29 +10,31 @@ export default function AchievementsSection() {
         <div className="text-center mb-16">
           <p className="section-label">Honors &amp; Awards</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Achievements</h2>
-          <p style={{ textAlign: "center" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
             Milestones that mark the journey so far
-          </p>
+          </div>
         </div>
 
         {/* Achievement cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8" style={{ maxWidth: "820px", margin: "0 auto" }}>
           {achievements.map((item) => (
-            <div key={item.title.en} className="card flex items-start gap-5 md:gap-6">
+            <div key={item.title.en} className="card flex flex-col items-center gap-4 md:gap-5" style={{ textAlign: "center" }}>
               {/* Emoji */}
-              <div className="text-4xl flex-shrink-0 leading-none mt-1">{item.icon}</div>
+              <div className="text-4xl leading-none">{item.icon}</div>
 
               <div className="min-w-0">
-                <h3 className="font-bold text-slate-900 leading-snug mb-2">
+                <h3 className="font-bold text-slate-900 leading-snug mb-2" style={{ textAlign: "center" }}>
                   {item.title.en}
                 </h3>
-                <p className="text-slate-500 text-sm mb-3 leading-relaxed">{item.org}</p>
-                <span
-                  className="inline-block px-3 py-1 rounded-full text-xs font-semibold"
-                  style={{ background: "#f0fdfe", color: "#06b6d4", border: "1px solid #a5f3fc" }}
-                >
-                  {item.year}
-                </span>
+                <p className="text-slate-500 text-sm mb-3 leading-relaxed" style={{ textAlign: "center" }}>{item.org}</p>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <span
+                    className="inline-block px-3 py-1 rounded-full text-xs font-semibold"
+                    style={{ background: "#f0fdfe", color: "#06b6d4", border: "1px solid #a5f3fc" }}
+                  >
+                    {item.year}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
