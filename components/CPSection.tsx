@@ -83,8 +83,8 @@ export default function CPSection() {
   );
 
   return (
-    <section id="cp" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="cp" className="py-20 md:py-28 overflow-hidden" style={{ background: "#f8fafc" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Header */}
         <div className="text-center mb-16">
           <p className="section-label">Competitive Programming</p>
