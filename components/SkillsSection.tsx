@@ -17,7 +17,7 @@ export default function SkillsSection() {
         <div className="text-center mb-16">
           <p className="section-label">Technical Skills</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What I Work With</h2>
-          <p className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <p style={{ textAlign: "center" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Technologies and tools I use to bring ideas to life
           </p>
         </div>
