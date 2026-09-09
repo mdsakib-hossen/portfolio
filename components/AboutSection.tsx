@@ -6,7 +6,7 @@ import { profile, stats } from "@/lib/data";
 
 function CountUp({ end, suffix }: { end: number; suffix: string }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
@@ -19,112 +19,81 @@ function CountUp({ end, suffix }: { end: number; suffix: string }) {
           const step = (end / duration) * 16;
           const interval = setInterval(() => {
             start += step;
-            if (start >= end) {
-              setCount(end);
-              clearInterval(interval);
-            } else {
-              setCount(Math.floor(start));
-            }
+            if (start >= end) { setCount(end); clearInterval(interval); }
+            else setCount(Math.floor(start));
           }, 16);
         }
-      },
-      { threshold: 0.5 }
+      }, { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [end]);
 
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
+  return <div ref={ref}>{count}{suffix}</div>;
 }
 
 const infoCards = [
-  {
-    Icon: Building2,
-    label: "Institute",
-    value: "Bangladesh Polytechnic Institute, Rajshahi",
-  },
-  {
-    Icon: BookOpen,
-    label: "Department",
-    value: "Computer Science & Technology (CST)",
-  },
-  {
-    Icon: MapPin,
-    label: "Location",
-    value: profile.location,
-  },
-  {
-    Icon: Mail,
-    label: "Email",
-    value: profile.email,
-  },
+  { Icon: Building2, label: "Institute", value: "Bangladesh Polytechnic Institute, Rajshahi" },
+  { Icon: BookOpen, label: "Department", value: "Computer Science & Technology (CST)" },
+  { Icon: MapPin, label: "Location", value: "Rajshahi, Bangladesh" },
+  { Icon: Mail, label: "Email", value: "mdsakibhassan632@gmail.com" },
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-14">
-          <p className="section-label">About Me</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Who I Am
-          </h2>
-        </div>
+    <section id="about" style={{ background: "#f8fafc", padding: "80px 0 100px" }}>
+      <div style={{ maxWidth: "900px", margin: "0 auto", padding: "0 24px" }}>
 
-        {/* About text */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h3 className="text-lg font-bold text-slate-900 mb-4 text-center">
-            Passionate Developer &amp; Competitive Programmer
-          </h3>
-          <p className="text-slate-600 leading-relaxed mb-4 text-sm md:text-base text-center">
-            {profile.about.en}
-          </p>
-          <p className="text-slate-500 leading-relaxed text-sm text-center">
-            I believe in learning by building — from campus management systems to
-            national-level result platforms, I love creating software that makes a difference.
-          </p>
-        </div>
+        {/* Section label */}
+        <p style={{ textAlign: "center", fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: "#06b6d4", fontWeight: 700, marginBottom: "12px" }}>
+          ABOUT ME
+        </p>
+
+        {/* Title */}
+        <h2 style={{ textAlign: "center", fontSize: "clamp(2rem, 5vw, 2.8rem)", fontWeight: 800, color: "#0f172a", marginBottom: "16px" }}>
+          Who I Am
+        </h2>
+
+        {/* Subtitle */}
+        <p style={{ textAlign: "center", fontSize: "16px", fontWeight: 600, color: "#334155", marginBottom: "20px" }}>
+          Passionate Developer &amp; Competitive Programmer
+        </p>
+
+        {/* Description */}
+        <p style={{ textAlign: "center", fontSize: "15px", color: "#475569", lineHeight: "1.85", maxWidth: "680px", margin: "0 auto 14px", fontWeight: 400 }}>
+          {profile.about.en}
+        </p>
+        <p style={{ textAlign: "center", fontSize: "14px", color: "#64748b", lineHeight: "1.8", maxWidth: "600px", margin: "0 auto 60px" }}>
+          I believe in learning by building — from campus management systems to national-level result platforms, I love creating software that makes a difference.
+        </p>
 
         {/* Info cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-16">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", maxWidth: "700px", margin: "0 auto 60px" }}>
           {infoCards.map(({ Icon, label, value }) => (
-            <div
-              key={label}
-              className="card"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 rounded-lg bg-cyan-50">
-                  <Icon size={16} className="text-cyan-500" />
+            <div key={label} style={{ background: "white", borderRadius: "14px", padding: "20px 24px", border: "1px solid #e2e8f0", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                <div style={{ background: "#f0fdfe", padding: "8px", borderRadius: "8px" }}>
+                  <Icon size={15} color="#06b6d4" />
                 </div>
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
-                  {label}
-                </span>
+                <span style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "1px" }}>{label}</span>
               </div>
-              <p className="text-slate-700 text-sm font-medium leading-snug">{value}</p>
+              <p style={{ fontSize: "13px", color: "#334155", fontWeight: 600, lineHeight: "1.5" }}>{value}</p>
             </div>
           ))}
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "16px" }}>
           {stats.map((stat) => (
-            <div
-              key={stat.label.en}
-              className="text-center p-6 md:p-8 rounded-2xl bg-white border border-slate-100 shadow-sm"
-            >
-              <div className="text-3xl md:text-4xl font-extrabold text-cyan-500 mb-3">
+            <div key={stat.label.en} style={{ background: "white", borderRadius: "14px", padding: "28px 20px", textAlign: "center", border: "1px solid #e2e8f0", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+              <div style={{ fontSize: "2.2rem", fontWeight: 900, color: "#06b6d4", marginBottom: "8px" }}>
                 <CountUp end={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-slate-500 text-sm font-medium leading-snug">{stat.label.en}</div>
+              <div style={{ fontSize: "13px", color: "#64748b", fontWeight: 500 }}>{stat.label.en}</div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
