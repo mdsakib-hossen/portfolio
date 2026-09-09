@@ -102,7 +102,6 @@ export const skills = [
       { name: "REST API", level: 75 },
       { name: "JWT Auth", level: 72 },
       { name: "Database Design", level: 70 },
-      { name: "Machine Learning", level: 40 },
     ],
   },
 ];
