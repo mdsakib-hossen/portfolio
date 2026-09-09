@@ -150,22 +150,22 @@ export default function HeroSection() {
 
         {/* Name */}
         <h1
-          className="font-extrabold text-slate-900 mb-3"
-          style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)", lineHeight: 1.15 }}
+          className="font-extrabold text-slate-900 mb-3 px-2 w-full"
+          style={{ fontSize: "clamp(1.6rem, 7vw, 3.2rem)", lineHeight: 1.2, wordBreak: "break-word" }}
         >
           Hi, I&apos;m Md. Sakib Hossen 👋
         </h1>
 
         {/* Typing text */}
         <div className="h-8 flex items-center justify-center mb-5">
-          <span className="text-base md:text-lg font-semibold text-cyan-500">
+          <span className="text-sm md:text-base font-semibold text-cyan-500">
             {displayText}
             <span className="animate-pulse">|</span>
           </span>
         </div>
 
         {/* Description */}
-        <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-2xl mb-8">
+        <p className="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-8 px-2">
           Passionate about Competitive Programming &amp; building real-world software that solves actual
           problems. Currently training with{" "}
           <span className="text-cyan-500 font-semibold">XPSC @ Phitron</span> and building{" "}
@@ -208,7 +208,7 @@ export default function HeroSection() {
         </div>
 
         {/* Mobile tech badges */}
-        <div className="flex flex-wrap gap-2 justify-center mt-8 md:hidden">
+        <div className="flex flex-wrap gap-2 justify-center mt-10 md:hidden px-4">
           {["C++", "Python", "React Native", "Flask", "Firebase", "DSA"].map((tech) => (
             <span key={tech} className="badge">
               {tech}
