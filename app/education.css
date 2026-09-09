@@ -1,0 +1,16 @@
+/* Education timeline mobile responsive */
+@media (max-width: 640px) {
+  .edu-timeline-item {
+    padding-left: 40px !important;
+    padding-right: 0 !important;
+    justify-content: flex-start !important;
+  }
+  .edu-timeline-dot {
+    left: 12px !important;
+    transform: none !important;
+  }
+  .edu-timeline-line {
+    left: 18px !important;
+    transform: none !important;
+  }
+}
