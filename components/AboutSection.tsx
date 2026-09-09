@@ -77,42 +77,39 @@ export default function AboutSection() {
           </h2>
         </div>
 
-        {/* Content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
-          {/* Left: About text */}
-          <div>
-            <h3 className="text-xl font-bold text-slate-900 mb-4">
-              Passionate Developer &amp; Competitive Programmer
-            </h3>
-            <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base">
-              {profile.about.en}
-            </p>
-            <p className="text-slate-500 leading-loose text-sm md:text-base">
-              I believe in learning by building. Every project I take on is an opportunity to apply
-              theoretical knowledge to real problems. From campus management systems to national-level
-              result platforms, I love creating software that makes a difference.
-            </p>
-          </div>
+        {/* About text */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h3 className="text-xl font-bold text-slate-900 mb-4">
+            Passionate Developer &amp; Competitive Programmer
+          </h3>
+          <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base">
+            {profile.about.en}
+          </p>
+          <p className="text-slate-500 leading-loose text-sm md:text-base">
+            I believe in learning by building. Every project I take on is an opportunity to apply
+            theoretical knowledge to real problems. From campus management systems to national-level
+            result platforms, I love creating software that makes a difference.
+          </p>
+        </div>
 
-          {/* Right: Info cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {infoCards.map(({ Icon, label, value }) => (
-              <div
-                key={label}
-                className="card"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 rounded-lg bg-cyan-50">
-                    <Icon size={16} className="text-cyan-500" />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
-                    {label}
-                  </span>
+        {/* Info cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-16">
+          {infoCards.map(({ Icon, label, value }) => (
+            <div
+              key={label}
+              className="card"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 rounded-lg bg-cyan-50">
+                  <Icon size={16} className="text-cyan-500" />
                 </div>
-                <p className="text-slate-700 text-sm font-medium leading-snug">{value}</p>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
+                  {label}
+                </span>
               </div>
-            ))}
-          </div>
+              <p className="text-slate-700 text-sm font-medium leading-snug">{value}</p>
+            </div>
+          ))}
         </div>
 
         {/* Stats */}
