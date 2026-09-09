@@ -313,14 +313,18 @@ export default function CPSection() {
 
         {/* Goal banner */}
         <div
-          className="rounded-2xl p-8 text-center"
           style={{
+            maxWidth: "700px",
+            margin: "0 auto",
+            borderRadius: "16px",
+            padding: "40px 32px",
+            textAlign: "center",
             background: "linear-gradient(135deg, #f0fdfe, #e0f2fe)",
             border: "1px solid #a5f3fc",
           }}
         >
-          <div className="text-4xl mb-3">🏆</div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2">Aiming for Grandmaster</h3>
+          <div style={{ fontSize: "40px", marginBottom: "12px" }}>🏆</div>
+          <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#0f172a", marginBottom: "10px", textAlign: "center" }}>Aiming for Grandmaster</h3>
           <div style={{ textAlign: "center", color: "#64748b", fontSize: "14px", maxWidth: "420px", margin: "0 auto", lineHeight: "1.7" }}>
             My ultimate goal is to achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals
           </div>
