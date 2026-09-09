@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import Analytics from "@/components/Analytics";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -72,30 +71,30 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Structured Data
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    "mainEntity": {
+    mainEntity: {
       "@type": "Person",
-      "name": "Md. Sakib Hossen",
-      "alternateName": ["Sakib Hossen", "mdsakib-hossen"],
-      "jobTitle": "Competitive Programmer & Software Developer",
-      "description": "A passionate Competitive Programmer focused on Data Structures and Algorithms, alongside building real-life Software Development projects like BPI EduManage and Karigori Result.",
-      "url": BASE_URL,
-      "email": "mdsakibhassan632@gmail.com",
-      "affiliation": {
+      name: "Md. Sakib Hossen",
+      alternateName: ["Sakib Hossen", "mdsakib-hossen"],
+      jobTitle: "Competitive Programmer & Software Developer",
+      description:
+        "A passionate Competitive Programmer focused on Data Structures and Algorithms, alongside building real-life Software Development projects.",
+      url: BASE_URL,
+      email: "mdsakibhassan632@gmail.com",
+      affiliation: {
         "@type": "EducationalOrganization",
-        "name": "Bangladesh Polytechnic Institute, Rajshahi",
-        "url": "https://bpi.gov.bd"
+        name: "Bangladesh Polytechnic Institute, Rajshahi",
+        url: "https://bpi.gov.bd",
       },
-      "address": {
+      address: {
         "@type": "PostalAddress",
-        "addressLocality": "Rajshahi",
-        "addressCountry": "BD",
+        addressLocality: "Rajshahi",
+        addressCountry: "BD",
       },
-      "sameAs": [
+      sameAs: [
         "https://github.com/mdsakib-hossen",
         "https://www.linkedin.com/in/mdsakib-hossen",
         "https://codeforces.com/profile/mdsakibhossen",
@@ -103,48 +102,45 @@ const jsonLd = [
         "https://www.codechef.com/users/mdsakib_dev",
         "https://atcoder.jp/users/mdsakibhossen",
       ],
-      "knowsAbout": [
+      knowsAbout: [
         "Competitive Programming",
         "Software Development",
         "Artificial Intelligence",
         "Machine Learning",
         "Data Structures and Algorithms",
-        "React Native", "Flask", "Python", "C++",
+        "React Native",
+        "Flask",
+        "Python",
+        "C++",
       ],
-    }
+    },
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Md. Sakib Hossen Portfolio",
-    "url": BASE_URL,
-    "description": "Portfolio of Md. Sakib Hossen — Competitive Programmer, Software Developer, and AI/ML Learner from Bangladesh.",
-    "author": {
+    name: "Md. Sakib Hossen Portfolio",
+    url: BASE_URL,
+    description:
+      "Portfolio of Md. Sakib Hossen — Competitive Programmer, Software Developer, and AI/ML Learner from Bangladesh.",
+    author: {
       "@type": "Person",
-      "name": "Md. Sakib Hossen"
-    }
-  }
+      name: "Md. Sakib Hossen",
+    },
+  },
 ];
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className={inter.className}>
-        <ThemeProvider>
-          <Analytics />
-          {children}
-        </ThemeProvider>
+        <Analytics />
+        {children}
       </body>
     </html>
   );

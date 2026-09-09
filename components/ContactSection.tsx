@@ -1,18 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon, FacebookIcon } from "./icons";
 import { profile } from "@/lib/data";
 
-const MailIcon = ({ size = 20, className = "" }: { size?: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-  </svg>
-);
-
 const FORMSPREE_ID = "xwlezyop";
+
+const contactLinks = [
+  {
+    key: "email",
+    Icon: Mail,
+    label: "Email",
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    color: "#ef4444",
+  },
+  {
+    key: "github",
+    Icon: GithubIcon,
+    label: "GitHub",
+    value: "github.com/mdsakib-hossen",
+    href: profile.github,
+    color: "#0f172a",
+  },
+  {
+    key: "linkedin",
+    Icon: LinkedinIcon,
+    label: "LinkedIn",
+    value: "linkedin.com/in/mdsakib-hossen",
+    href: profile.linkedin,
+    color: "#0a66c2",
+  },
+  {
+    key: "facebook",
+    Icon: FacebookIcon,
+    label: "Facebook",
+    value: "Facebook Profile",
+    href: profile.facebook,
+    color: "#1877f2",
+  },
+];
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -22,18 +50,25 @@ export default function ContactSection() {
     e.preventDefault();
     setStatus("loading");
     try {
+      // Save to Supabase
       const { createClient } = await import("@supabase/supabase-js");
       const sb = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
       );
-      await sb.from("messages").insert({ name: form.name, email: form.email, message: form.message });
+      await sb.from("messages").insert({
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      });
 
+      // Send via Formspree
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
       });
+
       if (res.ok) {
         setStatus("success");
         setForm({ name: "", email: "", message: "" });
@@ -46,115 +81,133 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="text-center mb-8 md:mb-16">
-          <p className="text-cyan-400 font-mono text-sm tracking-widest mb-2">// GET IN TOUCH</p>
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">Contact Me</h2>
+    <section id="contact" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <p className="section-label">Get In Touch</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Contact Me</h2>
+          <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+            Have a project idea, want to collaborate, or just want to say hi? My inbox is always open.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Left */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Left: contact info */}
           <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Let&apos;s work together!</h3>
-            <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-              Have a project idea, want to collaborate, or just want to say hi — my inbox is always open!
+            <h3 className="text-xl font-bold text-slate-900 mb-3">Let&apos;s work together!</h3>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-8">
+              Whether it&apos;s a freelance project, open source collaboration, or just a technical
+              discussion — feel free to reach out.
             </p>
 
-            <div className="space-y-3">
-              {[
-                { icon: MailIcon, label: profile.email, href: `mailto:${profile.email}`, color: "text-red-400" },
-                { icon: GithubIcon, label: profile.github.replace("https://", ""), href: profile.github, color: "text-white" },
-                { icon: LinkedinIcon, label: profile.linkedin.replace("https://", ""), href: profile.linkedin, color: "text-blue-400" },
-                { icon: FacebookIcon, label: "Facebook", href: profile.facebook, color: "text-blue-500" },
-              ].map(({ icon: Icon, label, href, color }) => (
-                <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 sm:gap-4 glass p-3 sm:p-4 rounded-xl group min-w-0 overflow-hidden"
+            <div className="flex flex-col gap-3">
+              {contactLinks.map(({ key, Icon, label, value, href, color }) => (
+                <a
+                  key={key}
+                  href={href}
+                  target={key === "email" ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-cyan-200 hover:shadow-sm transition-all group"
                 >
-                  <Icon size={18} className={`${color} group-hover:scale-110 transition-transform flex-shrink-0`} />
-                  <span className="text-gray-300 text-xs sm:text-sm truncate min-w-0 flex-1">{label}</span>
-                </motion.a>
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: color + "15" }}
+                  >
+                    <Icon size={17} style={{ color }} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs text-slate-400 font-medium">{label}</div>
+                    <div className="text-slate-700 text-sm font-medium truncate">{value}</div>
+                  </div>
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Right - Form */}
-          <div className="w-full">
+          {/* Right: form */}
+          <div>
             {status === "success" ? (
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="glass p-6 sm:p-8 rounded-2xl text-center h-full flex flex-col items-center justify-center min-h-[300px] sm:min-h-[400px]"
-              >
-                <CheckCircle size={52} className="text-green-400 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Message Sent! 🎉</h3>
-                <p className="text-gray-400 mb-6">I&apos;ll get back to you soon.</p>
-                <button onClick={() => setStatus("idle")}
-                  className="text-cyan-400 text-sm hover:underline">
+              <div className="card md:p-8 text-center h-full flex flex-col items-center justify-center min-h-[380px]">
+                <CheckCircle size={52} className="text-green-500 mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Message Sent! 🎉</h3>
+                <p className="text-slate-500 text-sm mb-6">I&apos;ll get back to you soon.</p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="text-cyan-500 text-sm hover:underline"
+                >
                   Send another message
                 </button>
-              </motion.div>
+              </div>
             ) : (
-              <form onSubmit={handleSubmit} className="glass p-5 sm:p-8 rounded-2xl space-y-4 sm:space-y-5 w-full">
+              <form onSubmit={handleSubmit} className="card md:p-8 flex flex-col gap-5">
                 {status === "error" && (
-                  <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 p-3 rounded-xl">
+                  <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 p-3 rounded-xl">
                     <AlertCircle size={16} className="flex-shrink-0" />
-                    Something went wrong. Try again.
+                    Something went wrong. Please try again.
                   </div>
                 )}
 
                 <div>
-                  <label className="text-cyan-400 text-sm font-mono mb-2 block">Your Name *</label>
-                  <input type="text" required value={form.name}
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full bg-white/5 border border-cyan-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm sm:text-base"
+                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
                     placeholder="John Doe"
                   />
                 </div>
 
                 <div>
-                  <label className="text-cyan-400 text-sm font-mono mb-2 block">Email Address *</label>
-                  <input type="email" required value={form.email}
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full bg-white/5 border border-cyan-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm sm:text-base"
+                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
                     placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label className="text-cyan-400 text-sm font-mono mb-2 block">Message *</label>
-                  <textarea required rows={4} value={form.message}
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
+                    Message *
+                  </label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full bg-white/5 border border-cyan-500/20 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none text-sm sm:text-base"
+                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors resize-none text-sm"
                     placeholder="Your message here..."
                   />
                 </div>
 
-                <motion.button type="submit" disabled={status === "loading"}
-                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-600 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 transition-opacity text-sm sm:text-base"
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="btn-primary flex items-center justify-center gap-2 w-full disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === "loading" ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
-                      <Send size={18} />
+                      <Send size={16} />
                       Send Message
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
             )}
           </div>
         </div>
-      </motion.div>
       </div>
     </section>
   );

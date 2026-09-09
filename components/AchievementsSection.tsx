@@ -1,102 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { achievements } from "@/lib/data";
 
 export default function AchievementsSection() {
   return (
-    <section id="achievements" className="section-padding max-w-5xl mx-auto px-4 sm:px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="text-center mb-8 md:mb-16">
-          <p className="text-cyan-400 font-mono text-sm tracking-widest mb-2">// MY JOURNEY</p>
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text">Achievements &amp; Timeline</h2>
+    <section id="achievements" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-14">
+          <p className="section-label">Honors &amp; Awards</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Achievements</h2>
+          <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+            Milestones that mark the journey so far
+          </p>
         </div>
 
-        {/* Mobile layout */}
-        <div className="md:hidden relative">
-          <div
-            className="absolute left-4 top-0 bottom-0 w-px"
-            style={{ background: "linear-gradient(to bottom, #06b6d4, #0ea5e9, transparent)" }}
-          />
+        {/* Achievement cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {achievements.map((item) => (
+            <div key={item.title.en} className="card flex items-start gap-5">
+              {/* Emoji */}
+              <div className="text-4xl flex-shrink-0 leading-none mt-0.5">{item.icon}</div>
 
-          <div className="space-y-6 pl-10">
-            {achievements.map(({ icon, title, org, year, color }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="relative"
-              >
-                <div
-                  className="absolute -left-[26px] top-4 w-4 h-4 rounded-full border-2 border-[#050b14] z-10 flex-shrink-0"
-                  style={{ background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", boxShadow: "0 0 10px rgba(6,182,212,0.5)" }}
-                />
-
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="glass rounded-xl p-4 border border-white/5 w-full"
+              <div className="min-w-0">
+                <h3 className="font-bold text-slate-900 leading-snug mb-1">
+                  {item.title.en}
+                </h3>
+                <p className="text-slate-500 text-sm mb-2 leading-relaxed">{item.org}</p>
+                <span
+                  className="inline-block px-3 py-0.5 rounded-full text-xs font-semibold"
+                  style={{ background: "#f0fdfe", color: "#06b6d4", border: "1px solid #a5f3fc" }}
                 >
-                  <span className="text-2xl block mb-2">{icon}</span>
-                  <h3 className={`font-bold text-sm sm:text-base bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1 break-words`}>
-                    {title["en"]}
-                  </h3>
-                  <p className="text-gray-400 text-xs break-words">{org}</p>
-                  <p className="text-cyan-400 text-xs font-mono mt-1">{year}</p>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+                  {item.year}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Desktop layout */}
-        <div className="hidden md:block relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
-            style={{ background: "linear-gradient(to bottom, #06b6d4, #0ea5e9, transparent)" }}
-          />
-
-          <div className="space-y-8">
-            {achievements.map(({ icon, title, org, year, color }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12, duration: 0.5 }}
-                className={`relative flex items-center ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
-              >
-                <div className={`w-[calc(50%-20px)] ${i % 2 === 0 ? "pr-4 text-right" : "pl-4 text-left"} min-w-0`}>
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    className="glass rounded-xl p-4 md:p-6 border border-white/5 inline-block w-full"
-                  >
-                    <span className="text-2xl md:text-4xl block mb-2">{icon}</span>
-                    <h3 className={`font-bold text-sm md:text-lg bg-gradient-to-r ${color} bg-clip-text text-transparent leading-snug mb-1 break-words`}>
-                      {title["en"]}
-                    </h3>
-                    <p className="text-gray-400 text-xs md:text-sm break-words">{org}</p>
-                    <p className="text-cyan-400 text-xs font-mono mt-1">{year}</p>
-                  </motion.div>
-                </div>
-
-                <div className="w-10 flex justify-center flex-shrink-0 relative z-10">
-                  <div className="w-4 h-4 rounded-full border-2 border-[#050b14]"
-                    style={{ background: "linear-gradient(135deg, #06b6d4, #0ea5e9)", boxShadow: "0 0 10px rgba(6,182,212,0.5)" }}
-                  />
-                </div>
-
-                <div className="w-[calc(50%-20px)]" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
