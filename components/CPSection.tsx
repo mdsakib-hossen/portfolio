@@ -321,10 +321,9 @@ export default function CPSection() {
         >
           <div className="text-4xl mb-3">🏆</div>
           <h3 className="text-xl font-bold text-slate-900 mb-2">Aiming for Grandmaster</h3>
-          <p className="text-slate-500 text-sm max-w-lg mx-auto">
-            My ultimate goal is to achieve Codeforces Grandmaster rating and represent Bangladesh in
-            ICPC World Finals
-          </p>
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "14px", maxWidth: "420px", margin: "0 auto", lineHeight: "1.7" }}>
+            My ultimate goal is to achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals
+          </div>
         </div>
       </div>
     </section>
