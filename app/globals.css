@@ -28,10 +28,12 @@ body {
   text-align: center;
 }
 
-/* Force center alignment in about section */
-#about p,
-#about h3 {
-  text-align: center;
+/* Force center in section headers */
+section p.text-slate-500,
+section p.text-slate-400,
+section p[style*="textAlign"] {
+  text-align: center !important;
+  display: block !important;
 }
 
 .card {
