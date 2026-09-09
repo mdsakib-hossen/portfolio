@@ -14,16 +14,16 @@ export default function SkillsSection() {
     <section id="skills" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-16">
           <p className="section-label">Technical Skills</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">What I Work With</h2>
-          <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What I Work With</h2>
+          <p className="text-slate-500 mt-4 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             Technologies and tools I use to bring ideas to life
           </p>
         </div>
 
         {/* Skill categories grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {skills.map((skillGroup) => {
             const categoryName = skillGroup.category.en;
             const icon = categoryIcons[categoryName] ?? "🔧";

@@ -84,10 +84,10 @@ export default function ContactSection() {
     <section id="contact" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-16">
           <p className="section-label">Get In Touch</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Contact Me</h2>
-          <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Contact Me</h2>
+          <p className="text-slate-500 mt-4 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             Have a project idea, want to collaborate, or just want to say hi? My inbox is always open.
           </p>
         </div>
@@ -95,13 +95,13 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Left: contact info */}
           <div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">Let&apos;s work together!</h3>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-8">
+            <h3 className="text-xl font-bold text-slate-900 mb-4">Let&apos;s work together!</h3>
+            <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-10">
               Whether it&apos;s a freelance project, open source collaboration, or just a technical
               discussion — feel free to reach out.
             </p>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {contactLinks.map(({ key, Icon, label, value, href, color }) => (
                 <a
                   key={key}
@@ -140,7 +140,7 @@ export default function ContactSection() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="card md:p-8 flex flex-col gap-5">
+              <form onSubmit={handleSubmit} className="card md:p-8 flex flex-col gap-6">
                 {status === "error" && (
                   <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 p-3 rounded-xl">
                     <AlertCircle size={16} className="flex-shrink-0" />

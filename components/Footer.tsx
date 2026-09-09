@@ -19,8 +19,8 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-slate-100 py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-5">
+    <footer className="bg-white border-t border-slate-100 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6">
         {/* Logo */}
         <div className="text-xl font-bold text-cyan-500">{"<Sakib />"}</div>
 

@@ -15,16 +15,16 @@ export default function ProjectsSection() {
     <section id="projects" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-16">
           <p className="section-label">My Work</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Featured Projects</h2>
-          <p className="text-slate-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Featured Projects</h2>
+          <p className="text-slate-500 mt-4 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
             Real-world software built to solve real problems
           </p>
         </div>
 
         {/* Project cards — full width stack */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-8">
           {projects.map((project) => {
             const status = statusConfig[project.statusType] ?? statusConfig.private;
 
@@ -80,7 +80,7 @@ export default function ProjectsSection() {
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-5">
+                    <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags.map((tag) => (
                         <span key={tag} className="badge text-xs">
                           {tag}

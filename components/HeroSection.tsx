@@ -16,12 +16,12 @@ const MailIcon = ({ size = 20, className = "" }: { size?: number; className?: st
 const typingTexts = profile.typingTexts.en;
 
 const floatingBadges = [
-  { label: "C++", style: { left: "-90px", top: "20px" } },
-  { label: "Python", style: { left: "-95px", top: "110px" } },
-  { label: "React Native", style: { right: "-105px", top: "10px" } },
-  { label: "Flask", style: { right: "-85px", top: "100px" } },
-  { label: "Firebase", style: { left: "-88px", top: "200px" } },
-  { label: "DSA", style: { right: "-75px", top: "190px" } },
+  { label: "C++", style: { left: "-100px", top: "10px" } },
+  { label: "Python", style: { left: "-108px", top: "100px" } },
+  { label: "React Native", style: { right: "-120px", top: "10px" } },
+  { label: "Flask", style: { right: "-95px", top: "100px" } },
+  { label: "Firebase", style: { left: "-100px", top: "190px" } },
+  { label: "DSA", style: { right: "-85px", top: "190px" } },
 ];
 
 export default function HeroSection() {
@@ -78,10 +78,10 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center py-28">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-28">
         {/* Photo */}
         <div
-          className="relative mb-10"
+          className="relative mb-12"
           style={{ width: "200px", height: "200px" }}
         >
           {/* Floating badges — md+ only */}
@@ -132,7 +132,7 @@ export default function HeroSection() {
 
           {/* Open to Collaborate badge */}
           <div
-            className="absolute -bottom-5 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap z-10"
+            className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap z-10"
             style={{
               background: "white",
               border: "1px solid #a5f3fc",
@@ -146,7 +146,7 @@ export default function HeroSection() {
         </div>
 
         {/* Spacer for badge */}
-        <div className="h-6" />
+        <div className="h-8" />
 
         {/* Name */}
         <h1

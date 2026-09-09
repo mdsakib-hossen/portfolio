@@ -72,22 +72,22 @@ export default function AboutSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <p className="section-label">About Me</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Who I Am
           </h2>
         </div>
 
         {/* Content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           {/* Left: About text */}
           <div>
             <h3 className="text-xl font-bold text-slate-900 mb-4">
               Passionate Developer &amp; Competitive Programmer
             </h3>
-            <p className="text-slate-600 leading-relaxed mb-5 text-sm md:text-base">
+            <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base">
               {profile.about.en}
             </p>
-            <p className="text-slate-500 leading-relaxed text-sm md:text-base">
+            <p className="text-slate-500 leading-loose text-sm md:text-base">
               I believe in learning by building. Every project I take on is an opportunity to apply
               theoretical knowledge to real problems. From campus management systems to national-level
               result platforms, I love creating software that makes a difference.
@@ -116,16 +116,16 @@ export default function AboutSection() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat) => (
             <div
               key={stat.label.en}
-              className="text-center p-6 rounded-2xl bg-white border border-slate-100 shadow-sm"
+              className="text-center p-6 md:p-8 rounded-2xl bg-white border border-slate-100 shadow-sm"
             >
-              <div className="text-3xl md:text-4xl font-extrabold text-cyan-500 mb-2">
+              <div className="text-3xl md:text-4xl font-extrabold text-cyan-500 mb-3">
                 <CountUp end={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-slate-500 text-sm font-medium">{stat.label.en}</div>
+              <div className="text-slate-500 text-sm font-medium leading-snug">{stat.label.en}</div>
             </div>
           ))}
         </div>
