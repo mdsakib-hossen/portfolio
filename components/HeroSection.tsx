@@ -174,7 +174,7 @@ export default function HeroSection() {
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-wrap gap-3 justify-center mb-8">
+        <div className="flex flex-wrap gap-3 justify-center mb-10">
           <button
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-primary"
@@ -187,7 +187,7 @@ export default function HeroSection() {
         </div>
 
         {/* Social icons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-4 mt-2">
           {[
             { Icon: GithubIcon, href: profile.github, label: "GitHub" },
             { Icon: LinkedinIcon, href: profile.linkedin, label: "LinkedIn" },
@@ -200,9 +200,9 @@ export default function HeroSection() {
               target={label === "Email" ? undefined : "_blank"}
               rel="noopener noreferrer"
               title={label}
-              className="p-2.5 rounded-xl border border-slate-200 text-slate-500 hover:border-cyan-300 hover:text-cyan-500 transition-all"
+              className="p-3 rounded-xl border border-slate-200 text-slate-500 hover:border-cyan-300 hover:text-cyan-500 transition-all"
             >
-              <Icon size={18} />
+              <Icon size={20} />
             </a>
           ))}
         </div>
