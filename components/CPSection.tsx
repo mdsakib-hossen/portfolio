@@ -89,9 +89,9 @@ export default function CPSection() {
         <div className="text-center mb-16">
           <p className="section-label">Competitive Programming</p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Where I Compete</h2>
-          <p style={{ textAlign: "center", display: "block" }} className="text-slate-500 mt-4 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "16px", lineHeight: "1.7" }}>
             Live stats from competitive programming platforms
-          </p>
+          </div>
           {lastUpdated && (
             <div className="flex items-center justify-center gap-2 mt-3">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
