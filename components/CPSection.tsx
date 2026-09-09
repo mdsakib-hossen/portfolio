@@ -153,7 +153,7 @@ export default function CPSection() {
                   ))}
                 </div>
 
-                <div className="mb-5">
+                <div className="mb-5 flex justify-center">
                   <span
                     className="text-xs font-semibold px-3 py-1 rounded-full capitalize"
                     style={{
@@ -167,7 +167,7 @@ export default function CPSection() {
 
                 {cf.recentContests.length > 0 && (
                   <div>
-                    <p className="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3">
+                    <p className="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3 text-center">
                       Recent Contests
                     </p>
                     <div className="space-y-2">
@@ -294,7 +294,7 @@ export default function CPSection() {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="card group flex flex-col gap-2"
+              className="card group flex flex-col gap-2 items-center text-center"
             >
               <div className="flex items-center justify-between">
                 <div className="w-9 h-9 rounded-lg bg-cyan-50 border border-cyan-100 flex items-center justify-center font-bold text-cyan-600 text-sm flex-shrink-0">
@@ -330,4 +330,5 @@ export default function CPSection() {
     </section>
   );
 }
+
 
