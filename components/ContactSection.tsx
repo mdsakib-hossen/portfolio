@@ -92,14 +92,13 @@ export default function ContactSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10" style={{ maxWidth: "900px", margin: "0 auto" }}>
           {/* Left: contact info */}
           <div>
-            <h3 className="text-xl font-bold text-slate-900 mb-4">Let&apos;s work together!</h3>
-            <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-10">
-              Whether it&apos;s a freelance project, open source collaboration, or just a technical
-              discussion — feel free to reach out.
-            </p>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#0f172a", marginBottom: "12px", textAlign: "center" }}>Let&apos;s work together!</h3>
+            <div style={{ textAlign: "center", color: "#64748b", fontSize: "14px", lineHeight: "1.7", marginBottom: "32px" }}>
+              Whether it&apos;s a freelance project, open source collaboration, or just a technical discussion — feel free to reach out.
+            </div>
 
             <div className="flex flex-col gap-4">
               {contactLinks.map(({ key, Icon, label, value, href, color }) => (
@@ -108,17 +107,14 @@ export default function ContactSection() {
                   href={href}
                   target={key === "email" ? undefined : "_blank"}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-cyan-200 hover:shadow-sm transition-all group"
+                  style={{ display: "flex", alignItems: "center", gap: "16px", padding: "14px 16px", borderRadius: "12px", background: "white", border: "1px solid #e2e8f0", textDecoration: "none", transition: "all 0.2s" }}
                 >
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: color + "15" }}
-                  >
+                  <div style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: color + "15" }}>
                     <Icon size={17} style={{ color }} />
                   </div>
-                  <div className="min-w-0">
-                    <div className="text-xs text-slate-400 font-medium">{label}</div>
-                    <div className="text-slate-700 text-sm font-medium truncate">{value}</div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>{label}</div>
+                    <div style={{ fontSize: "13px", color: "#334155", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{value}</div>
                   </div>
                 </a>
               ))}
