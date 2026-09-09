@@ -26,7 +26,7 @@ export default function SkillsSection() {
         </p>
 
         {/* 2x2 Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "20px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: "20px", maxWidth: "820px", margin: "0 auto" }}>
           {skills.map((skillGroup) => {
             const categoryName = skillGroup.category.en;
             const icon = categoryIcons[categoryName] ?? "🔧";

@@ -108,7 +108,7 @@ export default function CPSection() {
         </div>
 
         {/* Main cards: CF + LC */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
           {/* Codeforces */}
           <div className="card">
             <div className="flex items-center justify-between mb-6">
@@ -287,7 +287,7 @@ export default function CPSection() {
         </div>
 
         {/* Other platforms */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
           {smallPlatforms.map(({ platform, handle, url, icon }) => (
             <a
               key={platform}
