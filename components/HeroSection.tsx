@@ -207,14 +207,6 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* Mobile tech badges */}
-        <div className="flex flex-wrap gap-2 justify-center mt-10 md:hidden px-4">
-          {["C++", "Python", "React Native", "Flask", "Firebase", "DSA"].map((tech) => (
-            <span key={tech} className="badge">
-              {tech}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Scroll indicator */}
