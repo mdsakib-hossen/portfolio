@@ -165,6 +165,13 @@ export const projects = [
 
 export const achievements = [
   {
+    icon: "⭐⭐",
+    title: { en: "2-Star Coder — CodeChef", bn: "২-স্টার কোডার — CodeChef" },
+    org: "CodeChef · Rating 1424 · Div 3 · Global Rank 38,883",
+    year: "2026",
+    color: "from-amber-600 to-amber-400",
+  },
+  {
     icon: "🥈",
     title: { en: "2nd Place — BPI Hobby Fair", bn: "২য় স্থান — BPI Hobby Fair" },
     org: "Bangladesh Polytechnic Institute · EduManage",
