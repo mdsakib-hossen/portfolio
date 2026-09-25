@@ -165,13 +165,34 @@ export default function HeroSection() {
         </div>
 
         {/* Description */}
-        <p className="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-8 px-2">
+        <p className="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-6 px-2">
           Passionate about Competitive Programming &amp; building real-world software that solves actual
           problems. Currently training with{" "}
           <span className="text-cyan-500 font-semibold">XPSC @ Phitron</span> and building{" "}
           <span className="text-cyan-500 font-semibold">Karigori Result</span> for all BD Polytechnic
           students.
         </p>
+
+        {/* CP Badge */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+          <a
+            href="https://www.codechef.com/users/mdsakib_dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all hover:scale-105"
+            style={{ background: "#fdf6ec", border: "1px solid #f0c080", color: "#8B5E1A" }}
+          >
+            <span>⭐⭐</span>
+            <span>CodeChef Div 3 · 1424</span>
+          </a>
+          <div
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
+            style={{ background: "#f0fdfe", border: "1px solid #a5f3fc", color: "#0891b2" }}
+          >
+            <span>🏋️</span>
+            <span>XPSC @ Phitron</span>
+          </div>
+        </div>
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-3 justify-center mb-10">

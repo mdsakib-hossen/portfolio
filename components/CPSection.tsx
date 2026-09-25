@@ -107,8 +107,8 @@ export default function CPSection() {
           )}
         </div>
 
-        {/* Main cards: CF + LC */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
+        {/* Main cards: CF + LC + CodeChef */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
           {/* Codeforces */}
           <div className="card">
             <div className="flex items-center justify-between mb-6">
@@ -283,6 +283,65 @@ export default function CPSection() {
             ) : (
               <p className="text-slate-400 text-sm text-center py-6">Could not load data</p>
             )}
+          </div>
+
+          {/* CodeChef */}
+          <div className="card">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 to-amber-400 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
+                  CC
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900">CodeChef</h3>
+                  <p className="text-slate-400 text-xs font-mono">@mdsakib_dev</p>
+                </div>
+              </div>
+              <a
+                href="https://www.codechef.com/users/mdsakib_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={15} className="text-slate-400 hover:text-amber-500 transition-colors" />
+              </a>
+            </div>
+
+            {/* Rating */}
+            <div
+              className="rounded-xl p-4 text-center mb-5"
+              style={{ background: "#fffbeb", border: "1px solid #fde68a" }}
+            >
+              <div className="text-3xl font-extrabold text-amber-500">1424</div>
+              <div className="text-slate-400 text-xs mt-1">Current Rating</div>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              {[
+                { label: "Division", value: "Div 3", color: "#f59e0b" },
+                { label: "Stars", value: "⭐⭐", color: "#f59e0b" },
+                { label: "Global Rank", value: "38,883", color: "#06b6d4" },
+                { label: "Country Rank", value: "946", color: "#22c55e" },
+              ].map(({ label, value, color }) => (
+                <div
+                  key={label}
+                  className="rounded-xl p-3 text-center"
+                  style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
+                >
+                  <div className="text-base font-bold" style={{ color }}>{value}</div>
+                  <div className="text-slate-400 text-xs mt-1">{label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Highest rating */}
+            <div
+              className="rounded-xl p-3 text-center"
+              style={{ background: "#fffbeb", border: "1px solid #fde68a" }}
+            >
+              <div className="text-sm font-bold text-amber-500">Highest: 1424</div>
+              <div className="text-slate-400 text-xs">Best Rating Achieved</div>
+            </div>
           </div>
         </div>
 
