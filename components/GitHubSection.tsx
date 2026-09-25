@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Star, GitFork, Github } from "lucide-react";
+import { ExternalLink, Star, GitFork, GitBranch } from "lucide-react";
 import { profile, projects } from "@/lib/data";
 
 // Top pinned repos — manually listed (GitHub API needs token for pinned)
@@ -84,7 +84,7 @@ export default function GitHubSection() {
               background: "white", display: "flex", alignItems: "center", justifyContent: "center",
               flexShrink: 0,
             }}>
-              <Github size={24} color="#0f172a" />
+              <GitBranch size={24} color="#0f172a" />
             </div>
             <div>
               <div style={{ color: "white", fontWeight: 700, fontSize: "16px" }}>
@@ -167,7 +167,7 @@ export default function GitHubSection() {
                 {/* Repo name + links */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <Github size={16} color="#64748b" />
+                    <GitBranch size={16} color="#64748b" />
                     <a
                       href={repo.url}
                       target="_blank"
