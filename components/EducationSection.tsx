@@ -6,13 +6,14 @@ import { ExternalLink } from "lucide-react";
 // Academic Education data
 const academics = [
   {
-    icon: "🏫",
-    school: "Majgram Modhupur Govt. Primary School",
-    degree: "Primary School Certificate (PSC)",
-    year: "2018",
-    duration: "5 Years",
-    location: "Raninagar, Naogaon",
-    color: "#10b981",
+    icon: "🎓",
+    school: "Bangladesh Polytechnic Institute, Rajshahi",
+    degree: "Diploma in Engineering — CST",
+    year: "2025 – 2028",
+    duration: "4 Years",
+    location: "Rajshahi, Bangladesh",
+    color: "#06b6d4",
+    current: true,
   },
   {
     icon: "🏛️",
@@ -24,14 +25,13 @@ const academics = [
     color: "#f59e0b",
   },
   {
-    icon: "🎓",
-    school: "Bangladesh Polytechnic Institute, Rajshahi",
-    degree: "Diploma in Engineering — CST",
-    year: "2025 – 2028",
-    duration: "4 Years",
-    location: "Rajshahi, Bangladesh",
-    color: "#06b6d4",
-    current: true,
+    icon: "🏫",
+    school: "Majgram Modhupur Govt. Primary School",
+    degree: "Primary School Certificate (PSC)",
+    year: "2018",
+    duration: "5 Years",
+    location: "Raninagar, Naogaon",
+    color: "#10b981",
   },
 ];
 
