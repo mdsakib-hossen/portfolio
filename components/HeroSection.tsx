@@ -173,24 +173,52 @@ export default function HeroSection() {
           students.
         </p>
 
-        {/* CP Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+        {/* CP Highlight Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
           <a
             href="https://www.codechef.com/users/mdsakib_dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all hover:scale-105"
-            style={{ background: "#fdf6ec", border: "1px solid #f0c080", color: "#8B5E1A" }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105 hover:shadow-md"
+            style={{
+              background: "linear-gradient(135deg, #fef3c7, #fde68a)",
+              border: "1.5px solid #f59e0b",
+              color: "#92400e",
+              boxShadow: "0 2px 8px rgba(245,158,11,0.15)",
+            }}
           >
-            <span>⭐⭐</span>
-            <span>CodeChef Div 3 · 1424</span>
+            <span className="text-base">⭐⭐</span>
+            <span>CodeChef</span>
+            <span
+              className="px-2 py-0.5 rounded-full text-xs font-bold"
+              style={{ background: "#f59e0b", color: "white" }}
+            >
+              1424
+            </span>
           </a>
           <div
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-            style={{ background: "#f0fdfe", border: "1px solid #a5f3fc", color: "#0891b2" }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
+            style={{
+              background: "linear-gradient(135deg, #f0fdfe, #cffafe)",
+              border: "1.5px solid #06b6d4",
+              color: "#0e7490",
+              boxShadow: "0 2px 8px rgba(6,182,212,0.12)",
+            }}
           >
             <span>🏋️</span>
-            <span>XPSC @ Phitron</span>
+            <span>XPSC Member</span>
+          </div>
+          <div
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
+            style={{
+              background: "linear-gradient(135deg, #fdf4ff, #f3e8ff)",
+              border: "1.5px solid #a855f7",
+              color: "#7e22ce",
+              boxShadow: "0 2px 8px rgba(168,85,247,0.12)",
+            }}
+          >
+            <span>🎖️</span>
+            <span>Shohoj Coding Ambassador</span>
           </div>
         </div>
 
