@@ -181,17 +181,17 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105 hover:shadow-md"
             style={{
-              background: "linear-gradient(135deg, #fef3c7, #fde68a)",
-              border: "1.5px solid #f59e0b",
-              color: "#92400e",
-              boxShadow: "0 2px 8px rgba(245,158,11,0.15)",
+              background: "linear-gradient(135deg, #3d2314, #5B4638)",
+              border: "1.5px solid #5B4638",
+              color: "#ffffff",
+              boxShadow: "0 2px 8px rgba(91,70,56,0.3)",
             }}
           >
             <span className="text-base">⭐⭐</span>
             <span>CodeChef</span>
             <span
               className="px-2 py-0.5 rounded-full text-xs font-bold"
-              style={{ background: "#f59e0b", color: "white" }}
+              style={{ background: "rgba(255,255,255,0.2)", color: "white" }}
             >
               1424
             </span>
