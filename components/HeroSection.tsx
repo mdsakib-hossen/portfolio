@@ -187,14 +187,7 @@ export default function HeroSection() {
               boxShadow: "0 2px 8px rgba(91,70,56,0.3)",
             }}
           >
-            <span className="text-base">⭐⭐</span>
-            <span>CodeChef</span>
-            <span
-              className="px-2 py-0.5 rounded-full text-xs font-bold"
-              style={{ background: "rgba(255,255,255,0.2)", color: "white" }}
-            >
-              1424
-            </span>
+            <span>⭐⭐ CodeChef</span>
           </a>
           <div
             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
