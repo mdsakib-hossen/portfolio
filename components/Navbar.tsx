@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Home", id: "home" },
   { label: "About", id: "about" },
   { label: "Skills", id: "skills" },
   { label: "CP", id: "cp" },
@@ -18,11 +16,54 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const prog = document.getElementById("prog");
+      if (prog) {
+        const h = document.documentElement;
+        const scrolledPct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        prog.style.width = scrolledPct + "%";
+      }
+      const totop = document.getElementById("totop");
+      if (totop) totop.classList.toggle("on", window.scrollY > 600);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // scrollspy
+    const secs = navItems.map((n) => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    secs.forEach((s) => spy.observe(s));
+
+    // reveal on scroll
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      spy.disconnect();
+      io.disconnect();
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -32,70 +73,66 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-3"
-            : "bg-transparent py-5"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
-          <button
-            onClick={() => scrollTo("home")}
-            className="text-lg md:text-xl font-bold text-cyan-500 hover:text-cyan-600 transition-colors select-none"
-          >
-            {"<Sakib />"}
-          </button>
+      <div id="prog" />
+      <div className="bgfx">
+        <div className="blob b1" />
+        <div className="blob b2" />
+        <div className="blob b3" />
+      </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-7">
+      <header className={`nav ${scrolled ? "solid" : ""}`}>
+        <div className="navbar">
+          <button className="wordmark" onClick={() => scrollTo("top")}>
+            <span className="sq">{"</>"}</span> Sakib Hossen
+          </button>
+          <nav className="menu">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.id}
+                className={active === item.id ? "active" : ""}
                 onClick={() => scrollTo(item.id)}
-                className="text-sm font-medium text-slate-600 hover:text-cyan-500 transition-colors duration-200"
               >
                 {item.label}
-              </button>
+              </a>
             ))}
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2 rounded-lg border border-slate-200 text-slate-600 hover:border-cyan-300 hover:text-cyan-500 transition-all"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-white flex flex-col items-center justify-center gap-6">
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="absolute top-5 right-5 p-2 rounded-lg border border-slate-200 text-slate-600"
-            aria-label="Close menu"
-          >
-            <X size={20} />
-          </button>
-
-          <div className="text-2xl font-bold text-cyan-500 mb-4">{"<Sakib />"}</div>
-
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              className="text-xl font-semibold text-slate-700 hover:text-cyan-500 transition-colors"
-            >
-              {item.label}
+          </nav>
+          <div className="navcta">
+            <button className="btn btn-dark" onClick={() => scrollTo("contact")}>
+              Hire me <span className="ar">↗</span>
             </button>
-          ))}
+            <button
+              className={`burger ${menuOpen ? "open" : ""}`}
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Menu"
+            >
+              <i />
+              <i />
+              <i />
+            </button>
+          </div>
         </div>
-      )}
+      </header>
+
+      <div className={`mmenu ${menuOpen ? "open" : ""}`}>
+        {navItems.map((item) => (
+          <a key={item.id} onClick={() => scrollTo(item.id)}>
+            {item.label}
+          </a>
+        ))}
+        <div className="mfoot">
+          <a className="btn btn-accent" onClick={() => scrollTo("contact")}>
+            Hire me <span className="ar">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <button
+        id="totop"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Back to top"
+      >
+        ↑
+      </button>
     </>
   );
 }

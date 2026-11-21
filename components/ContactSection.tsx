@@ -1,50 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, AlertCircle, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, FacebookIcon } from "./icons";
 import { profile } from "@/lib/data";
 
 const FORMSPREE_ID = "xwlezyop";
 
 const contactLinks = [
-  {
-    key: "email",
-    Icon: Mail,
-    label: "Email",
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-    color: "#ef4444",
-  },
-  {
-    key: "github",
-    Icon: GithubIcon,
-    label: "GitHub",
-    value: "github.com/mdsakib-hossen",
-    href: profile.github,
-    color: "#0f172a",
-  },
-  {
-    key: "linkedin",
-    Icon: LinkedinIcon,
-    label: "LinkedIn",
-    value: "linkedin.com/in/mdsakib-hossen",
-    href: profile.linkedin,
-    color: "#0a66c2",
-  },
-  {
-    key: "facebook",
-    Icon: FacebookIcon,
-    label: "Facebook",
-    value: "Facebook Profile",
-    href: profile.facebook,
-    color: "#1877f2",
-  },
+  { key: "email", icon: "✉️", label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  { key: "github", icon: "🐙", label: "GitHub", value: "github.com/mdsakib-hossen", href: profile.github },
+  { key: "linkedin", icon: "💼", label: "LinkedIn", value: "linkedin.com/in/mdsakib-hossen", href: profile.linkedin },
+  { key: "facebook", icon: "📘", label: "Facebook", value: "Facebook Profile", href: profile.facebook },
+];
+
+const socials = [
+  { label: "GH", href: profile.github },
+  { label: "in", href: profile.linkedin },
+  { label: "fb", href: profile.facebook },
+  { label: "@", href: `mailto:${profile.email}` },
 ];
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,132 +58,110 @@ export default function ContactSection() {
     }
   };
 
+  const copyEmail = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(profile.email).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1600);
+      });
+    }
+  };
+
   return (
-    <section id="contact" className="py-20 md:py-28" style={{ background: "#f8fafc" }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label">Get In Touch</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Contact Me</h2>
-          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
-            Have a project idea, want to collaborate, or just want to say hi? My inbox is always open.
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10" style={{ maxWidth: "900px", margin: "0 auto" }}>
-          {/* Left: contact info */}
-          <div>
-            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#0f172a", marginBottom: "12px", textAlign: "center" }}>Let&apos;s work together!</h3>
-            <div style={{ textAlign: "center", color: "#64748b", fontSize: "14px", lineHeight: "1.7", marginBottom: "32px" }}>
-              Whether it&apos;s a freelance project, open source collaboration, or just a technical discussion — feel free to reach out.
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {contactLinks.map(({ key, Icon, label, value, href, color }) => (
-                <a
-                  key={key}
-                  href={href}
-                  target={key === "email" ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  style={{ display: "flex", alignItems: "center", gap: "16px", padding: "14px 16px", borderRadius: "12px", background: "white", border: "1px solid #e2e8f0", textDecoration: "none", transition: "all 0.2s" }}
-                >
-                  <div style={{ width: "36px", height: "36px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: color + "15" }}>
-                    <Icon size={17} style={{ color }} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>{label}</div>
-                    <div style={{ fontSize: "13px", color: "#334155", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{value}</div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: form */}
-          <div>
-            {status === "success" ? (
-              <div className="card md:p-8 text-center h-full flex flex-col items-center justify-center min-h-[380px]">
-                <CheckCircle size={52} className="text-green-500 mb-4" />
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Message Sent! 🎉</h3>
-                <p className="text-slate-500 text-sm mb-6">I&apos;ll get back to you soon.</p>
-                <button
-                  onClick={() => setStatus("idle")}
-                  className="text-cyan-500 text-sm hover:underline"
-                >
-                  Send another message
-                </button>
+    <section id="contact">
+      <div className="wrap">
+        <div className="contact">
+          <div className="contact-grid">
+            <div className="rv">
+              <span className="tag">Contact</span>
+              <h2>
+                Let&apos;s build <em>something</em> together
+              </h2>
+              <p>
+                Have a project idea, want to collaborate, or just want to say hi? My inbox is
+                always open.
+              </p>
+              <div className="info">
+                {contactLinks.map((c) => (
+                  <a key={c.key} href={c.href} target={c.key === "email" ? undefined : "_blank"} rel="noopener noreferrer">
+                    <span className="ic">{c.icon}</span>
+                    {c.key === "email" ? (
+                      <>
+                        <span>{c.value}</span>
+                        <button className="copybtn" onClick={(e) => { e.preventDefault(); copyEmail(); }} type="button">
+                          {copied ? "Copied ✓" : "Copy"}
+                        </button>
+                      </>
+                    ) : (
+                      <span>{c.value}</span>
+                    )}
+                  </a>
+                ))}
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="card md:p-8 flex flex-col gap-6">
-                {status === "error" && (
-                  <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 p-3 rounded-xl">
-                    <AlertCircle size={16} className="flex-shrink-0" />
-                    Something went wrong. Please try again.
-                  </div>
-                )}
+              <div className="socials">
+                {socials.map((s) => (
+                  <a key={s.label} href={s.href} target={s.label === "@" ? undefined : "_blank"} rel="noopener noreferrer">
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
-                    placeholder="John Doe"
-                  />
+            <div className="rv">
+              {status === "success" ? (
+                <div className="form" style={{ textAlign: "center", display: "grid", placeItems: "center", minHeight: "300px" }}>
+                  <div style={{ fontSize: "48px", marginBottom: "12px" }}>🎉</div>
+                  <h3 style={{ fontFamily: "var(--d)", fontSize: "22px", color: "#fff", marginBottom: "8px" }}>Message Sent!</h3>
+                  <p style={{ color: "#b9b9b3", fontSize: "14px" }}>I&apos;ll get back to you soon.</p>
+                  <button className="btn" onClick={() => setStatus("idle")} style={{ marginTop: "20px" }}>
+                    Send another message
+                  </button>
                 </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1.5">
-                    Message *
-                  </label>
-                  <textarea
-                    required
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-300 focus:outline-none focus:border-cyan-400 transition-colors resize-none text-sm"
-                    placeholder="Your message here..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="btn-primary flex items-center justify-center gap-2 w-full disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {status === "loading" ? (
-                    <div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      Send Message
-                    </>
+              ) : (
+                <form className="form" onSubmit={handleSubmit}>
+                  {status === "error" && (
+                    <div style={{ color: "#fca5a5", fontSize: "13px", marginBottom: "12px" }}>
+                      Something went wrong. Please try again.
+                    </div>
                   )}
-                </button>
-              </form>
-            )}
+                  <div className="f">
+                    <label>Your name</label>
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    />
+                  </div>
+                  <div className="f">
+                    <label>Email address</label>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    />
+                  </div>
+                  <div className="f">
+                    <label>Message</label>
+                    <textarea
+                      placeholder="Tell me about your project…"
+                      required
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    />
+                  </div>
+                  <button className="btn" type="submit" disabled={status === "loading"}>
+                    {status === "loading" ? "Sending…" : <>Send message <span className="ar">↗</span></>}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

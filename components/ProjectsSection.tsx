@@ -1,126 +1,158 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
-import { GithubIcon } from "./icons";
+import { useEffect, useRef } from "react";
 import { projects } from "@/lib/data";
 
-const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
-  live: { label: "Live", color: "#16a34a", bg: "#f0fdf4" },
-  dev: { label: "In Development", color: "#d97706", bg: "#fffbeb" },
-  private: { label: "Private", color: "#64748b", bg: "#f8fafc" },
+const statusConfig: Record<string, { label: string; cls: string }> = {
+  live: { label: "● Live", cls: "live" },
+  dev: { label: "◐ In Development", cls: "dev" },
+  private: { label: "🔒 Private", cls: "private" },
 };
+
+// Domain/url to show in the chrome bar
+const shotUrl: Record<string, string> = {
+  "BPI EduManage": "bpi-edumanage.app",
+  "College Canteen Pre-Order System": "college-canteen.onrender.com",
+  "Karigori Result": "karigori-result.app",
+};
+
+// Live projects get a real screenshot; others use CSS mockups
+const liveShot: Record<string, string | null> = {
+  "College Canteen Pre-Order System":
+    "https://image.thum.io/get/width/1200/crop/560/noanimate/https://college-canteen-mdhg.onrender.com",
+};
+
+function Mockup({ type }: { type: string }) {
+  if (type === "BPI EduManage") {
+    return (
+      <div className="mock">
+        <div className="side">
+          <i className="on" />
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="main">
+          <div className="hd">
+            <b />
+            <s />
+          </div>
+          <div className="tiles">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="ln" />
+          <div className="ln s" />
+        </div>
+      </div>
+    );
+  }
+  if (type === "Karigori Result") {
+    return (
+      <div className="mock">
+        <div className="main">
+          <div className="hd">
+            <b />
+            <s />
+          </div>
+          <div className="tr">
+            <span className="c" />
+            <span className="l" />
+            <span className="p" />
+          </div>
+          <div className="tr">
+            <span className="c" />
+            <span className="l" />
+            <span className="p" style={{ background: "#12a150" }} />
+          </div>
+          <div className="tr">
+            <span className="c" />
+            <span className="l" />
+            <span className="p" style={{ background: "#d97706" }} />
+          </div>
+          <div className="ln s" />
+        </div>
+      </div>
+    );
+  }
+  // College Canteen (QR style) — used as fallback
+  return (
+    <div className="mock">
+      <div className="main">
+        <div className="hd">
+          <b />
+          <s />
+        </div>
+        <div className="rowq">
+          <div className="qr" />
+          <div className="col">
+            <div className="ln a" />
+            <div className="ln s" />
+          </div>
+        </div>
+        <div className="ln" />
+        <div className="ln s" />
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 md:py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label">My Work</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Featured Projects</h2>
-          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "12px", lineHeight: "1.7" }}>
-            Real-world software built to solve real problems
-          </div>
+    <section id="projects">
+      <div className="wrap">
+        <div className="shead center">
+          <span className="tag">Projects</span>
+          <h2>
+            Things I&apos;ve <em>built</em>
+          </h2>
+          <p className="sdesc">
+            Real-world software built to solve real problems — designed, built and shipped end to
+            end.
+          </p>
         </div>
-
-        {/* Project cards — full width stack */}
-        <div className="flex flex-col gap-8" style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <div className="pgrid">
           {projects.map((project) => {
             const status = statusConfig[project.statusType] ?? statusConfig.private;
-
+            const shot = liveShot[project.title] ?? null;
             return (
-              <div key={project.title} className="card md:p-8">
-                <div className="flex flex-col md:flex-row md:items-start gap-5">
-                  {/* Gradient accent bar */}
-                  <div
-                    className="hidden md:block w-1.5 rounded-full flex-shrink-0 self-stretch"
-                    style={{
-                      background: `linear-gradient(${project.color.replace("from-", "").replace(" to-", ", ")})`,
-                      minHeight: "60px",
-                    }}
-                  />
-
-                  <div className="flex-1 min-w-0">
-                    {/* Title row */}
-                    <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-slate-900">{project.title}</h3>
-
-                      {/* Award badge */}
-                      {project.award && (
-                        <span className="badge text-amber-600 bg-amber-50 border-amber-200">
-                          {project.award}
-                        </span>
-                      )}
-
-                      {/* Status badge */}
-                      <span
-                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border"
-                        style={{
-                          color: status.color,
-                          background: status.bg,
-                          borderColor: status.color + "40",
-                        }}
-                      >
-                        {project.statusType === "live" && (
-                          <span
-                            className="w-1.5 h-1.5 rounded-full mr-1.5 animate-pulse"
-                            style={{ background: status.color }}
-                          />
-                        )}
-                        {status.label}
-                      </span>
-                    </div>
-
-                    {/* Subtitle */}
-                    <p className="text-slate-500 text-sm mb-3" style={{ textAlign: "center" }}>{project.subtitle.en}</p>
-
-                    {/* Description */}
-                    <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-5">
-                      {project.description.en}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="badge text-xs">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action buttons */}
-                    <div className="flex gap-3 flex-wrap">
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-primary flex items-center gap-2 text-sm py-2.5 px-5"
-                        >
-                          <ExternalLink size={14} />
-                          Live Demo
-                        </a>
-                      )}
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-outline flex items-center gap-2 text-sm py-2 px-5"
-                        >
-                          <GithubIcon size={14} />
-                          GitHub
-                        </a>
-                      )}
-                      {!project.liveUrl && !project.githubUrl && (
-                        <span className="text-slate-400 text-sm italic flex items-center gap-1.5">
-                          🔒 Source code private
-                        </span>
-                      )}
-                    </div>
+              <article className="proj rv" key={project.title}>
+                <ProjectShot
+                  title={project.title}
+                  colorFrom={project.color}
+                  statusLabel={status.label}
+                  statusCls={status.cls}
+                  award={project.award}
+                  shotUrl={shotUrl[project.title]}
+                  liveShot={shot}
+                />
+                <div className="body">
+                  <h3>{project.title.replace(" Pre-Order System", "")}</h3>
+                  <div className="sub">{project.subtitle.en}</div>
+                  <p>{project.description.en}</p>
+                  <div className="tech">
+                    {project.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                  <div className="links">
+                    {project.liveUrl ? (
+                      <a className="plink primary" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        Live demo <span className="ar">↗</span>
+                      </a>
+                    ) : null}
+                    {project.githubUrl ? (
+                      <a className="plink ghost" href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        GitHub
+                      </a>
+                    ) : (
+                      <span className="priv">🔒 Source code private</span>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
@@ -129,3 +161,59 @@ export default function ProjectsSection() {
   );
 }
 
+function ProjectShot({
+  title,
+  colorFrom,
+  statusLabel,
+  statusCls,
+  award,
+  shotUrl,
+  liveShot,
+}: {
+  title: string;
+  colorFrom: string;
+  statusLabel: string;
+  statusCls: string;
+  award: string | null;
+  shotUrl: string;
+  liveShot: string | null;
+}) {
+  const shotRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!liveShot || !shotRef.current) return;
+    const img = document.createElement("img");
+    img.className = "shotimg";
+    img.alt = `${title} preview`;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.addEventListener("load", () => {
+      img.classList.add("loaded");
+      shotRef.current?.classList.add("hasimg");
+    });
+    img.addEventListener("error", () => img.remove());
+    img.src = liveShot;
+    shotRef.current.appendChild(img);
+  }, [liveShot, title]);
+
+  // parse gradient from data.ts color like "from-green-600 to-cyan-600"
+  const grad = colorFrom.replace("from-", "").replace(" to-", ", ");
+
+  return (
+    <div
+      className="shot"
+      ref={shotRef}
+      style={{ background: `linear-gradient(135deg, ${grad})` }}
+    >
+      <div className="chrome">
+        <i style={{ background: "#ff5f57" }} />
+        <i style={{ background: "#febc2e" }} />
+        <i style={{ background: "#28c840" }} />
+        <span className="url">{shotUrl}</span>
+      </div>
+      <Mockup type={title} />
+      {award && <span className="badge">{award}</span>}
+      <span className={`st ${statusCls}`}>{statusLabel}</span>
+    </div>
+  );
+}

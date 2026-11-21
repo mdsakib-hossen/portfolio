@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExternalLink, TrendingUp, TrendingDown, Minus, RefreshCw } from "lucide-react";
 import { cpProfiles } from "@/lib/data";
 
 interface CFData {
@@ -46,11 +45,19 @@ const smallPlatforms = cpProfiles.filter(
   (p) => p.platform !== "Codeforces" && p.platform !== "LeetCode"
 );
 
+const cpColors: Record<string, string> = {
+  Codeforces: "#1f6feb",
+  LeetCode: "#e5a00d",
+  CodeChef: "#d97706",
+  AtCoder: "#64748b",
+  HackerRank: "#16a34a",
+  VJudge: "#0891b2",
+};
+
 export default function CPSection() {
   const [cf, setCf] = useState<CFData | null>(null);
   const [lc, setLc] = useState<LCData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState("");
 
   const fetchData = async () => {
     setLoading(true);
@@ -63,9 +70,8 @@ export default function CPSection() {
       const lcData = await lcRes.json();
       if (!cfData.error) setCf(cfData);
       if (!lcData.error) setLc(lcData);
-      setLastUpdated(new Date().toLocaleTimeString());
     } catch {
-      // silently fail
+      /* silently fail */
     }
     setLoading(false);
   };
@@ -74,323 +80,188 @@ export default function CPSection() {
     fetchData();
   }, []);
 
-  const Skeleton = () => (
-    <div className="space-y-3">
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="h-6 bg-slate-100 rounded-lg animate-pulse" />
-      ))}
-    </div>
-  );
-
   return (
-    <section id="cp" className="py-20 md:py-28 overflow-hidden" style={{ background: "#f8fafc" }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label">Competitive Programming</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Where I Compete</h2>
-          <div style={{ textAlign: "center", color: "#64748b", fontSize: "15px", marginTop: "16px", lineHeight: "1.7" }}>
-            Live stats from competitive programming platforms
-          </div>
-          {lastUpdated && (
-            <div className="flex items-center justify-center gap-2 mt-3">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-slate-400 text-xs">Live · Updated {lastUpdated}</span>
-              <button
-                onClick={fetchData}
-                className="text-cyan-500 hover:text-cyan-600 transition-colors"
-                aria-label="Refresh data"
-              >
-                <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
-              </button>
-            </div>
-          )}
+    <section id="cp">
+      <div className="wrap">
+        <div className="shead">
+          <span className="tag">Competitive Programming</span>
+          <h2>
+            Where I <em>compete</em>
+          </h2>
+          <p className="sdesc">Live stats from competitive programming platforms.</p>
+          <span className="livepill">
+            <span className="d" /> Live · {loading ? "loading…" : "updated"}
+          </span>
         </div>
 
-        {/* Main cards: CF + LC + CodeChef */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
+        <div className="cpgrid">
           {/* Codeforces */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
-                  CF
-                </div>
+          <div className="cpcard rv">
+            <div className="h">
+              <div className="l">
+                <div className="logo" style={{ background: cpColors.Codeforces }}>CF</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Codeforces</h3>
-                  <p className="text-slate-400 text-xs font-mono">@mdsakibhossen</p>
+                  <h3>Codeforces</h3>
+                  <div className="handle">@mdsakibhossen</div>
                 </div>
               </div>
-              <a
-                href="https://codeforces.com/profile/mdsakibhossen"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink size={15} className="text-slate-400 hover:text-blue-500 transition-colors" />
-              </a>
+              <a className="ex" href="https://codeforces.com/profile/mdsakibhossen" target="_blank" rel="noopener noreferrer">↗</a>
             </div>
-
             {loading ? (
-              <Skeleton />
+              <div className="skeleton" style={{ height: "120px" }} />
             ) : cf ? (
               <>
-                <div className="grid grid-cols-3 gap-3 mb-5">
-                  {[
-                    { label: "Rating", value: cf.rating, color: rankColor[cf.rank] || "#06b6d4" },
-                    { label: "Max", value: cf.maxRating, color: "#f59e0b" },
-                    { label: "Solved", value: cf.solved, color: "#22c55e" },
-                  ].map(({ label, value, color }) => (
-                    <div
-                      key={label}
-                      className="rounded-xl p-3 text-center"
-                      style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
-                    >
-                      <div className="text-xl font-bold" style={{ color }}>
-                        {value}
-                      </div>
-                      <div className="text-slate-400 text-xs mt-1">{label}</div>
-                    </div>
-                  ))}
+                <div className="stat3">
+                  <div>
+                    <div className="n" style={{ color: rankColor[cf.rank] || "#06b6d4" }}>{cf.rating}</div>
+                    <div className="l">Rating</div>
+                  </div>
+                  <div>
+                    <div className="n">{cf.maxRating}</div>
+                    <div className="l">Max</div>
+                  </div>
+                  <div>
+                    <div className="n" style={{ color: "#22c55e" }}>{cf.solved}</div>
+                    <div className="l">Solved</div>
+                  </div>
                 </div>
-
-                <div className="mb-5 flex justify-center">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded-full capitalize"
-                    style={{
-                      background: `${rankColor[cf.rank] ?? "#06b6d4"}18`,
-                      color: rankColor[cf.rank] ?? "#06b6d4",
-                    }}
-                  >
+                <div className="rankpill">
+                  <span style={{ background: `${rankColor[cf.rank] ?? "#06b6d4"}1a`, color: rankColor[cf.rank] ?? "#06b6d4" }}>
                     {cf.rank}
                   </span>
                 </div>
-
                 {cf.recentContests.length > 0 && (
                   <div>
-                    <p className="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-3 text-center">
-                      Recent Contests
-                    </p>
-                    <div className="space-y-2">
-                      {cf.recentContests.slice(0, 3).map((c, i) => (
-                        <div key={i} className="flex items-center justify-between text-xs gap-2">
-                          <span className="text-slate-600 truncate flex-1 max-w-[55%]">
-                            {c.contestName}
-                          </span>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-slate-400">#{c.rank}</span>
-                            <span
-                              className={`flex items-center gap-0.5 font-bold ${
-                                c.ratingChange > 0
-                                  ? "text-green-500"
-                                  : c.ratingChange < 0
-                                  ? "text-red-500"
-                                  : "text-slate-400"
-                              }`}
-                            >
-                              {c.ratingChange > 0 ? (
-                                <TrendingUp size={10} />
-                              ) : c.ratingChange < 0 ? (
-                                <TrendingDown size={10} />
-                              ) : (
-                                <Minus size={10} />
-                              )}
-                              {c.ratingChange > 0 ? "+" : ""}
-                              {c.ratingChange}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="cpnote" style={{ textAlign: "center", marginBottom: "8px" }}>
+                      RECENT CONTESTS
                     </div>
+                    {cf.recentContests.slice(0, 3).map((c, i) => (
+                      <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: "4px" }}>
+                        <span style={{ color: "var(--muted)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "60%" }}>
+                          {c.contestName}
+                        </span>
+                        <span style={{ color: c.ratingChange > 0 ? "#22c55e" : c.ratingChange < 0 ? "#ef4444" : "var(--muted)" }}>
+                          {c.ratingChange > 0 ? "+" : ""}{c.ratingChange}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 )}
               </>
             ) : (
-              <p className="text-slate-400 text-sm text-center py-6">Could not load data</p>
+              <p className="cpnote">Could not load data</p>
             )}
           </div>
 
           {/* LeetCode */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-500 to-yellow-400 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
-                  LC
-                </div>
+          <div className="cpcard rv">
+            <div className="h">
+              <div className="l">
+                <div className="logo" style={{ background: cpColors.LeetCode }}>LC</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">LeetCode</h3>
-                  <p className="text-slate-400 text-xs font-mono">@mdsakib-dev</p>
+                  <h3>LeetCode</h3>
+                  <div className="handle">@mdsakib-dev</div>
                 </div>
               </div>
-              <a
-                href="https://leetcode.com/u/mdsakib-dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink size={15} className="text-slate-400 hover:text-yellow-500 transition-colors" />
-              </a>
+              <a className="ex" href="https://leetcode.com/u/mdsakib-dev/" target="_blank" rel="noopener noreferrer">↗</a>
             </div>
-
             {loading ? (
-              <Skeleton />
+              <div className="skeleton" style={{ height: "120px" }} />
             ) : lc ? (
               <>
-                <div
-                  className="rounded-xl p-4 text-center mb-5"
-                  style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
-                >
-                  <div className="text-3xl font-extrabold text-yellow-500">{lc.total}</div>
-                  <div className="text-slate-400 text-xs mt-1">Total Solved</div>
+                <div className="cpbig">
+                  <div className="n" style={{ color: cpColors.LeetCode }}>{lc.total}</div>
+                  <div className="l">Total Solved</div>
                 </div>
-
-                <div className="space-y-3 mb-5">
-                  {[
-                    { label: "Easy", count: lc.easy, color: "#22c55e", bg: "#f0fdf4" },
-                    { label: "Medium", count: lc.medium, color: "#f59e0b", bg: "#fffbeb" },
-                    { label: "Hard", count: lc.hard, color: "#ef4444", bg: "#fef2f2" },
-                  ].map(({ label, count, color, bg }) => (
-                    <div key={label}>
-                      <div className="flex justify-between text-xs mb-1.5">
-                        <span className="font-medium" style={{ color }}>
-                          {label}
-                        </span>
-                        <span className="text-slate-500">{count}</span>
+                {(["Easy", "Medium", "Hard"] as const).map((label) => {
+                  const count = label === "Easy" ? lc.easy : label === "Medium" ? lc.medium : lc.hard;
+                  const color = label === "Easy" ? "#22c55e" : label === "Medium" ? "#f59e0b" : "#ef4444";
+                  return (
+                    <div className="cpbar" key={label}>
+                      <div className="t">
+                        <span style={{ color, fontWeight: 600 }}>{label}</span>
+                        <span style={{ color: "var(--muted)" }}>{count}</span>
                       </div>
-                      <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-1000"
-                          style={{
-                            width: `${lc.total ? (count / lc.total) * 100 : 0}%`,
-                            background: color,
-                          }}
-                        />
+                      <div className="track">
+                        <div className="fill" style={{ width: `${lc.total ? (count / lc.total) * 100 : 0}%`, background: color }} />
                       </div>
                     </div>
-                  ))}
-                </div>
-
+                  );
+                })}
                 {lc.ranking > 0 && (
-                  <div
-                    className="rounded-xl p-3 text-center"
-                    style={{ background: "#f0fdfe", border: "1px solid #a5f3fc" }}
-                  >
-                    <div className="text-lg font-bold text-cyan-500">
-                      #{lc.ranking.toLocaleString()}
-                    </div>
-                    <div className="text-slate-400 text-xs">Global Ranking</div>
+                  <div className="cpbig" style={{ marginBottom: 0 }}>
+                    <div className="n" style={{ color: "#06b6d4", fontSize: "1.3rem" }}>#{lc.ranking.toLocaleString()}</div>
+                    <div className="l">Global Ranking</div>
                   </div>
                 )}
               </>
             ) : (
-              <p className="text-slate-400 text-sm text-center py-6">Could not load data</p>
+              <p className="cpnote">Could not load data</p>
             )}
           </div>
 
           {/* CodeChef */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 to-amber-400 flex items-center justify-center font-bold text-white text-sm flex-shrink-0">
-                  CC
-                </div>
+          <div className="cpcard rv">
+            <div className="h">
+              <div className="l">
+                <div className="logo" style={{ background: cpColors.CodeChef }}>CC</div>
                 <div>
-                  <h3 className="font-bold text-slate-900">CodeChef</h3>
-                  <p className="text-slate-400 text-xs font-mono">@mdsakib_dev</p>
+                  <h3>CodeChef</h3>
+                  <div className="handle">@mdsakib_dev</div>
                 </div>
               </div>
-              <a
-                href="https://www.codechef.com/users/mdsakib_dev"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink size={15} className="text-slate-400 hover:text-amber-500 transition-colors" />
-              </a>
+              <a className="ex" href="https://www.codechef.com/users/mdsakib_dev" target="_blank" rel="noopener noreferrer">↗</a>
             </div>
-
-            {/* Rating */}
-            <div
-              className="rounded-xl p-4 text-center mb-5"
-              style={{ background: "#fffbeb", border: "1px solid #fde68a" }}
-            >
-              <div className="text-3xl font-extrabold text-amber-500">1424</div>
-              <div className="text-slate-400 text-xs mt-1">Current Rating</div>
+            <div className="cpbig">
+              <div className="n" style={{ color: cpColors.CodeChef }}>1424</div>
+              <div className="l">Current Rating</div>
             </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
-              {[
-                { label: "Division", value: "Div 3", color: "#f59e0b" },
-                { label: "Stars", value: "⭐⭐", color: "#f59e0b" },
-                { label: "Global Rank", value: "38,883", color: "#06b6d4" },
-                { label: "Country Rank", value: "946", color: "#22c55e" },
-              ].map(({ label, value, color }) => (
-                <div
-                  key={label}
-                  className="rounded-xl p-3 text-center"
-                  style={{ background: "#f8fafc", border: "1px solid #e2e8f0" }}
-                >
-                  <div className="text-base font-bold" style={{ color }}>{value}</div>
-                  <div className="text-slate-400 text-xs mt-1">{label}</div>
-                </div>
-              ))}
+            <div className="stat2">
+              <div>
+                <div className="n" style={{ color: cpColors.CodeChef }}>Div 3</div>
+                <div className="l">Division</div>
+              </div>
+              <div>
+                <div className="n" style={{ color: cpColors.CodeChef }}>⭐⭐</div>
+                <div className="l">Stars</div>
+              </div>
+              <div>
+                <div className="n" style={{ color: "#06b6d4" }}>38,883</div>
+                <div className="l">Global Rank</div>
+              </div>
+              <div>
+                <div className="n" style={{ color: "#22c55e" }}>946</div>
+                <div className="l">Country Rank</div>
+              </div>
             </div>
-
-            {/* Highest rating */}
-            <div
-              className="rounded-xl p-3 text-center"
-              style={{ background: "#fffbeb", border: "1px solid #fde68a" }}
-            >
-              <div className="text-sm font-bold text-amber-500">Highest: 1424</div>
-              <div className="text-slate-400 text-xs">Best Rating Achieved</div>
+            <div className="cpbig" style={{ marginBottom: 0 }}>
+              <div className="n" style={{ fontSize: "1.2rem", color: cpColors.CodeChef }}>Highest: 1424</div>
+              <div className="l">Best Rating</div>
             </div>
           </div>
         </div>
 
         {/* Other platforms */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10" style={{ maxWidth: "900px", margin: "0 auto 40px" }}>
+        <div className="smallgrid">
           {smallPlatforms.map(({ platform, handle, url, icon }) => (
-            <a
-              key={platform}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card group flex flex-col gap-2 items-center text-center"
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-9 h-9 rounded-lg bg-cyan-50 border border-cyan-100 flex items-center justify-center font-bold text-cyan-600 text-sm flex-shrink-0">
-                  {icon}
-                </div>
-                <ExternalLink
-                  size={13}
-                  className="text-slate-300 group-hover:text-cyan-500 transition-colors"
-                />
-              </div>
-              <h3 className="font-bold text-slate-900 text-sm">{platform}</h3>
-              <p className="text-cyan-500 text-xs font-mono truncate">@{handle}</p>
+            <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="splatform rv">
+              <div className="ic">{icon}</div>
+              <h3>{platform}</h3>
+              <p>@{handle}</p>
             </a>
           ))}
         </div>
 
         {/* Goal banner */}
-        <div
-          style={{
-            maxWidth: "700px",
-            margin: "0 auto",
-            borderRadius: "16px",
-            padding: "40px 32px",
-            textAlign: "center",
-            background: "linear-gradient(135deg, #f0fdfe, #e0f2fe)",
-            border: "1px solid #a5f3fc",
-          }}
-        >
-          <div style={{ fontSize: "40px", marginBottom: "12px" }}>🏆</div>
-          <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#0f172a", marginBottom: "10px", textAlign: "center" }}>Aiming for Grandmaster</h3>
-          <div style={{ textAlign: "center", color: "#64748b", fontSize: "14px", maxWidth: "420px", margin: "0 auto", lineHeight: "1.7" }}>
-            My ultimate goal is to achieve Codeforces Grandmaster rating and represent Bangladesh in ICPC World Finals
-          </div>
+        <div className="goalbanner rv">
+          <div className="em">🏆</div>
+          <h3>Aiming for Grandmaster</h3>
+          <p>
+            My ultimate goal is to achieve Codeforces Grandmaster rating and represent Bangladesh
+            in ICPC World Finals.
+          </p>
         </div>
       </div>
     </section>
   );
 }
-
-

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Mail, BookOpen, Building2 } from "lucide-react";
 import { profile, stats } from "@/lib/data";
 
 function CountUp({ end, suffix }: { end: number; suffix: string }) {
@@ -19,81 +18,94 @@ function CountUp({ end, suffix }: { end: number; suffix: string }) {
           const step = (end / duration) * 16;
           const interval = setInterval(() => {
             start += step;
-            if (start >= end) { setCount(end); clearInterval(interval); }
-            else setCount(Math.floor(start));
+            if (start >= end) {
+              setCount(end);
+              clearInterval(interval);
+            } else setCount(Math.floor(start));
           }, 16);
         }
-      }, { threshold: 0.5 }
+      },
+      { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [end]);
 
-  return <div ref={ref}>{count}{suffix}</div>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
-const infoCards = [
-  { Icon: Building2, label: "Institute", value: "Bangladesh Polytechnic Institute, Rajshahi" },
-  { Icon: BookOpen, label: "Department", value: "Computer Science & Technology (CST)" },
-  { Icon: MapPin, label: "Location", value: "Rajshahi, Bangladesh" },
-  { Icon: Mail, label: "Email", value: "mdsakibhassan632@gmail.com" },
+const facts = [
+  { ic: "🏛️", k: "Institute", v: profile.institute },
+  { ic: "💻", k: "Department", v: profile.department },
+  { ic: "📍", k: "Location", v: profile.location },
+  { ic: "✉️", k: "Email", v: profile.email },
+];
+
+const timeline = [
+  { y: "2025 – 2028", h: "Diploma in CST", p: profile.institute, now: true },
+  { y: "2026 – 2027", h: "CSE Fundamentals", p: "Phitron (Programming Hero) — DSA, OOP, Backend, AI/ML" },
+  { y: "2026", h: "Shohoj Coding Campus Ambassador", p: "Leadership & community building" },
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" style={{ background: "#f8fafc", padding: "80px 0 100px" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto", padding: "0 24px" }}>
-
-        {/* Section label */}
-        <p style={{ textAlign: "center", fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: "#06b6d4", fontWeight: 700, marginBottom: "12px" }}>
-          ABOUT ME
-        </p>
-
-        {/* Title */}
-        <h2 style={{ textAlign: "center", fontSize: "clamp(2rem, 5vw, 2.8rem)", fontWeight: 800, color: "#0f172a", marginBottom: "16px" }}>
-          Who I Am
-        </h2>
-
-        {/* Subtitle */}
-        <p style={{ textAlign: "center", fontSize: "16px", fontWeight: 600, color: "#334155", marginBottom: "20px" }}>
-          Passionate Developer &amp; Competitive Programmer
-        </p>
-
-        {/* Description */}
-        <p style={{ textAlign: "center", fontSize: "15px", color: "#475569", lineHeight: "1.85", maxWidth: "680px", margin: "0 auto 14px", fontWeight: 400 }}>
-          {profile.about.en}
-        </p>
-        <p style={{ textAlign: "center", fontSize: "14px", color: "#64748b", lineHeight: "1.8", maxWidth: "600px", margin: "0 auto 60px" }}>
-          I believe in learning by building — from campus management systems to national-level result platforms, I love creating software that makes a difference.
-        </p>
-
-        {/* Info cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", maxWidth: "700px", margin: "0 auto 60px" }}>
-          {infoCards.map(({ Icon, label, value }) => (
-            <div key={label} style={{ background: "white", borderRadius: "14px", padding: "20px 24px", border: "1px solid #e2e8f0", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                <div style={{ background: "#f0fdfe", padding: "8px", borderRadius: "8px" }}>
-                  <Icon size={15} color="#06b6d4" />
+    <section id="about">
+      <div className="wrap">
+        <div className="shead">
+          <span className="tag">About</span>
+          <h2>
+            Turning ideas into <em>real software</em>
+          </h2>
+        </div>
+        <div className="about-grid">
+          <div className="rv">
+            <p className="big">
+              I&apos;m a <em>Computer Science &amp; Technology</em> student who loves building
+              things that actually get used — from campus systems to national result platforms.
+            </p>
+            <p className="txt">{profile.about.en}</p>
+            <div className="statrow">
+              {stats.map((stat) => (
+                <div className="s" key={stat.label.en}>
+                  <div className="n">
+                    <CountUp end={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="l">{stat.label.en}</div>
                 </div>
-                <span style={{ fontSize: "10px", fontWeight: 700, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "1px" }}>{label}</span>
-              </div>
-              <p style={{ fontSize: "13px", color: "#334155", fontWeight: 600, lineHeight: "1.5" }}>{value}</p>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "16px" }}>
-          {stats.map((stat) => (
-            <div key={stat.label.en} style={{ background: "white", borderRadius: "14px", padding: "28px 20px", textAlign: "center", border: "1px solid #e2e8f0", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
-              <div style={{ fontSize: "2.2rem", fontWeight: 900, color: "#06b6d4", marginBottom: "8px" }}>
-                <CountUp end={stat.value} suffix={stat.suffix} />
-              </div>
-              <div style={{ fontSize: "13px", color: "#64748b", fontWeight: 500 }}>{stat.label.en}</div>
+          </div>
+          <div className="rv">
+            <div className="facts">
+              {facts.map((f) => (
+                <div key={f.k}>
+                  <span className="ic">{f.ic}</span>
+                  <div className="k">{f.k}</div>
+                  <div className="v">{f.v}</div>
+                </div>
+              ))}
             </div>
-          ))}
+            <div style={{ marginTop: "26px" }}>
+              <div className="subh">📅 Journey</div>
+              <div className="tl">
+                {timeline.map((t, i) => (
+                  <div className="it" key={i}>
+                    <div className="y">{t.y}</div>
+                    <h4>
+                      {t.h} {t.now && <span className="now">Current</span>}
+                    </h4>
+                    <p>{t.p}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
     </section>
   );
