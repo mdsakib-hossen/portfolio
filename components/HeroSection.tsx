@@ -109,8 +109,7 @@ export default function HeroSection() {
           </div>
           <p className="lead">
             Passionate about <b>Competitive Programming</b> &amp; building real-world software.
-            Currently training with <b>XPSC @ Phitron</b> and building <b>Karigori Result</b> for
-            all BD Polytechnic students.
+            Currently training with <b>XPSC @ Phitron</b> and built <b>BPI EduManage</b> — a complete college management system running live at Bangladesh Polytechnic Institute.
           </p>
           <div className="hero-cta">
             <button className="btn btn-accent" onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}>
@@ -170,15 +169,6 @@ export default function HeroSection() {
                 <span>Firebase</span>
                 <span>DSA</span>
               </div>
-            </div>
-          </div>
-          <div className="fc fc1">
-            <div className="b" style={{ background: "rgba(251,191,36,.18)", color: "#b45309" }}>
-              🥈
-            </div>
-            <div>
-              <div className="t">Hobby Fair</div>
-              <div className="s">2nd place</div>
             </div>
           </div>
           <div className="fc fc2">
