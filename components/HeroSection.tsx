@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+// useRef kept for CountUp observer
 import { profile, stats } from "@/lib/data";
 
 const typingTexts = profile.typingTexts.en;
@@ -54,9 +55,8 @@ export default function HeroSection() {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [photoUrl, setPhotoUrl] = useState<string>("");
-  const fileRef = useRef<HTMLInputElement>(null);
 
-  // Load photo from Supabase
+  // Load photo from Supabase only
   useEffect(() => {
     import("@/lib/supabase").then(({ supabase }) => {
       supabase
@@ -67,12 +67,6 @@ export default function HeroSection() {
           if (data?.photo_url) setPhotoUrl(data.photo_url);
         });
     });
-  }, []);
-
-  // Check localStorage for uploaded avatar
-  useEffect(() => {
-    const saved = localStorage.getItem("portfolio_avatar_v1");
-    if (saved) setPhotoUrl(saved);
   }, []);
 
   // Typing effect
@@ -96,22 +90,6 @@ export default function HeroSection() {
     }, isDeleting ? 40 : 80);
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, textIndex]);
-
-  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !file.type.startsWith("image/")) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      setPhotoUrl(result);
-      try {
-        localStorage.setItem("portfolio_avatar_v1", result);
-      } catch {
-        /* storage full — ignore */
-      }
-    };
-    reader.readAsDataURL(file);
-  };
 
   return (
     <section className="hero" id="top">
@@ -165,29 +143,9 @@ export default function HeroSection() {
           <div className="main">
             <div className="top" />
             <div className="ava-wrap">
-              <div
-                className={`ava ${photoUrl ? "hasimg" : ""}`}
-                id="avatar"
-                role="button"
-                tabIndex={0}
-                title="Click to upload your photo"
-                onClick={() => fileRef.current?.click()}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    fileRef.current?.click();
-                  }
-                }}
-              >
-                <span className="cam" />
+              <div className={`ava ${photoUrl ? "hasimg" : ""}`} id="avatar">
                 {photoUrl && <img src={photoUrl} alt={profile.name} />}
                 <span className="init">SH</span>
-              </div>
-              <input ref={fileRef} type="file" accept="image/*" hidden onChange={handleAvatarUpload} />
-              <div className="ava-note">
-                Tap the box to
-                <br />
-                upload your photo
               </div>
             </div>
             <div className="info">
